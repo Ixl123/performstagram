@@ -13,7 +13,6 @@ describe('Action Creators', () => {
       const actual = increment(5);
       expect(actual).toEqual(expected);
     });
-
   });
 
   describe('addComment',()=> {
