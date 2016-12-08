@@ -8,6 +8,7 @@ class PhotoGrid extends Component {
                     .props
                     .posts
                     .map((post, i) => <Photo {...this.props} key={i} i={i} post={post}/>)}
+
             </div>
         );
     }

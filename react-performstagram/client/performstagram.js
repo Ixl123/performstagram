@@ -1,27 +1,21 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import {render} from 'react-dom';
 
-import App from './components/App'
-import Signup from './components/Signup'
+import App from './components/App';
 import PhotoGrid from './components/PhotoGrid';
 import Single from './components/Single';
 import store, {history} from './store';
-import {Provider, connect} from 'react-redux';
 // import css
-import css from './styles/style.styl'
+import css from './styles/style.styl';
 // import router
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
-
-const targetEl = document.getElementById('root')
+import {Provider} from 'react-redux';
+import {getRoutes} from './routes';
+import {initAuth} from './components/firebase/firebaseAuth';
 const router = (
     <Provider store={store}>
-        <Router history={history}>
-            <Route path="/" component={App}>
-                <IndexRoute component={Signup}></IndexRoute>
-                <Route path='/view/:postId' component={Single}></Route>
-            </Route>
-        </Router>
+        <Router history={history} routes={getRoutes(store.getState)}/>
     </Provider>
-)
+);
 
-ReactDOM.render(router, targetEl)
+initAuth(store.dispatch).then(() => render(router, document.getElementById('root')))

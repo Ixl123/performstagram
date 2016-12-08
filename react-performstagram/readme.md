@@ -1,5 +1,4 @@
-# Learn Redux
-
+# Redux Performstagram
 A simple React + Redux implementation.
 
 ## Running

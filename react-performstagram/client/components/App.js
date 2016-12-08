@@ -5,15 +5,15 @@ import * as actionCreator from '../actions/actionCreator';
 import Main from './Main';
 
 export const mapStateToPros = (state) => {
+    debugger;
     return {posts: state.posts, comments: state.comments};
 }
-console.log(Main);
-debugger;
 
 export const mapDispatchToProps = (dispatch) => {
+    debugger;
     return bindActionCreators(actionCreator, dispatch);
 }
 
 const App = connect(mapStateToPros, mapDispatchToProps)(Main);
-
-export default Main;
+console.log(App);
+export default App;
