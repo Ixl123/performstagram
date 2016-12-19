@@ -1,3 +1,5 @@
+import firebase from 'firebase';
+
 import {firebaseAuth} from '../components/firebase';
 
 // increment

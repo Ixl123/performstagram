@@ -9,6 +9,7 @@ import rootReducer from './reducers/index';
 
 import posts from './data/posts.1';
 import comments from './data/comments.1';
+import AuthState from './reducers/auth'
 
 const defaultState = {
     posts,
@@ -16,9 +17,9 @@ const defaultState = {
 }
 const middleware = applyMiddleware(thunk);
 
-const enhancers = compose(window.devToolsExtension
+const enhancers = compose(middleware, window.devToolsExtension
     ? window.devToolsExtension()
-    : f => f, middleware)
+    : f => f)
 
 const store = createStore(rootReducer, defaultState, enhancers);
 

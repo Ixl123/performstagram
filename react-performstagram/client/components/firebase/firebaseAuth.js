@@ -12,9 +12,11 @@ export function initAuth(dispatch) {
     });
 }
 export function getAuth(state) {
+    debugger;
     return state.auth;
 }
 
 export function isAuthenticated(state) {
+    debugger;
     return getAuth(state).authenticated;
 }

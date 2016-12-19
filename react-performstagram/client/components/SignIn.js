@@ -8,9 +8,21 @@ class SignIn extends Component {
     }
     render() {
 
-        const signInWithGithub = () => {}
-        const signInWithGoogle = () => {}
-        const signInWithTwitter = () => {}
+        const signInWithGithub = () => {
+            this
+                .props
+                .signInWithGithub();
+        }
+        const signInWithGoogle = () => {
+            this
+                .props
+                .signInWithGoogle();
+        }
+        const signInWithTwitter = () => {
+            this
+                .props
+                .signInWithTwitter();
+        }
 
         return (
             <div className="g-row sign-in">

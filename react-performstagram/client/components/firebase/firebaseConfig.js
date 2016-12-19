@@ -1,7 +1,7 @@
 export const firebaseConfig = {
-    apiKey: 'AIzaSyD5LS2tKNkcAOgm5sWFr1Zf_KyQ6V-Fj_A',
-    authDomain: 'performstagram.firebaseapp.com',
-    databaseURL: 'https://performstagram.firebaseio.com',
-    storageBucket: 'performstagram.appspot.com',
-    messagingSenderId: '308270135999'
+    apiKey: 'AIzaSyDUIdypVb0OJcBxkeM27Igij1Hj9M-0GEE',
+    authDomain: 'performstagram-ec72e.firebaseapp.com',
+    databaseURL: 'https://performstagram-ec72e.firebaseio.com',
+    storageBucket: 'performstagram-ec72e.appspot.com',
+    messagingSenderId: '447900732483'
 };
