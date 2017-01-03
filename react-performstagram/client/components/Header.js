@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 class Header extends Component {
+
     render() {
         authenticated = this.props.authenticated;
         signout = this.props.signOut;

@@ -4,7 +4,6 @@ import {actionCreator} from '../actions/actionCreator';
 class SignIn extends Component {
     constructor() {
         super()
-
     }
     render() {
 
@@ -25,21 +24,26 @@ class SignIn extends Component {
         }
 
         return (
-            <div className="g-row sign-in">
-                <div className="g-col">
-                    <h1 className="sign-in__heading">Sign in</h1>
+            <div className="sign-in_flex-container">
+                <div className="sign-in_flex-item-account">
                     <button
                         className="btn sign-in__button"
                         onClick={signInWithGithub}
-                        type="button">GitHub</button>
+                        type="button">
+                        <i className="fa fa-github fa-lg" aria-hidden="true"></i>
+                        &nbsp; Sign in with GitHub</button>
                     <button
                         className="btn sign-in__button"
                         onClick={signInWithGoogle}
-                        type="button">Google</button>
+                        type="button">
+                        <i className="fa fa-google fa-lg" aria-hidden="true"></i>
+                        &nbsp; Sign in with Google</button>
                     <button
                         className="btn sign-in__button"
                         onClick={signInWithTwitter}
-                        type="button">Twitter</button>
+                        type="button">
+                        <i className="fa fa-twitter fa-lg" aria-hidden="true"></i>
+                        &nbsp; Sign in with Twitter</button>
                 </div>
             </div>
         )

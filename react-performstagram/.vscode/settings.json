@@ -13,4 +13,6 @@
                                 // only from the root of
                                 // your workspace 
     }
+,
+"languageStylus.useSeparator": false
 }

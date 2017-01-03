@@ -1,11 +1,23 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
-class Main extends Component {
+import {paths} from '../routes';
+import {browserHistory} from 'react-router'
 
+class Main extends Component {
+    /**
+     * gets called whenever the state changes redux method
+     */
+    componentWillReceiveProps(nextProps) {
+        const {auth} = this.props;
+
+        if (auth.authenticated && !nextProps.auth.authenticated) {
+            browserHistory.replace(paths.SIGN_IN);
+        } else if (!auth.authenticated && nextProps.auth.authenticated) {
+            browserHistory.replace(paths.PHOTO_GRID);
+        }
+    }
     render() {
         const authenticated = this.props;
-
-        console.log(authenticated);
         const signOut = this.props.signOut;
         return (
             <div>

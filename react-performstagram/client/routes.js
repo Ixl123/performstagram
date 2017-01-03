@@ -2,11 +2,13 @@ import {isAuthenticated} from './components/firebase/firebaseAuth';
 import App from './components/App';
 import SignIn from './components/SignIn';
 import PhotoGrid from './components/PhotoGrid';
+import Single from './components/Single';
 
 export const paths = {
     ROOT: '/',
     SIGN_IN: '/sign-in',
-    PHOTO_GRID: '/'
+    PHOTO_GRID: '/',
+    SINGLE_PHOTO: '/view/:postId'
 };
 
 const requireAuth = (getState) => {
@@ -26,8 +28,6 @@ const requireUnauth = (getState) => {
 };
 
 export const getRoutes = (getState) => {
-    debugger;
-    console.log(App);
     return {
         path: paths.ROOT,
         component: App,
@@ -41,6 +41,10 @@ export const getRoutes = (getState) => {
                 path: paths.SIGN_IN,
                 component: SignIn,
                 onEnter: requireUnauth(getState)
+            }, {
+                path: paths.SINGLE_PHOTO,
+                component: Single,
+                onEnter: requireAuth(getState)
             }
         ]
     };
