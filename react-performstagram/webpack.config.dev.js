@@ -7,7 +7,7 @@ module.exports = {
     'webpack-hot-middleware/client', './client/performstagram'
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, './public'),
     filename: 'bundle.js',
     publicPath: '/static/'
   },
@@ -20,7 +20,7 @@ module.exports = {
       // js
       {
         test: /\.js$/,
-        loaders: ['babel'],
+        loaders: ['babel-loader'],
         include: path.join(__dirname, 'client')
       },
       // CSS

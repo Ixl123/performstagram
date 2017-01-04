@@ -11,6 +11,11 @@ export const paths = {
     SINGLE_PHOTO: '/view/:postId'
 };
 
+/**
+ * to enter the application the user has to be signed in.
+ * this method is called on every route where the user has to be signed in.
+ * If the user is not signed he get rerouted to the signin view.
+ */
 const requireAuth = (getState) => {
     return (nextState, replace) => {
         if (!isAuthenticated(getState())) {

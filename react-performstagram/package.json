@@ -10,15 +10,15 @@
     "start": "node devServer.js"
   },
   "repository": {
-    "type": "git",
-    "url": "https://github.com/Ixl123/performstagram"
+    "url": "https://github.com/Ixl123/performstagram",
+    "type": "git"
   },
   "author": "Jacob Cofman",
   "license": "MIT",
   "homepage": "",
   "dependencies": {
-    "babel-core": "^6.18.2",
-    "babel-eslint": "^7.1.0",
+    "babel-core": "^6.21.0",
+    "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.3",
     "babel-plugin-react-transform": "^2.0.0",
     "babel-plugin-transform-object-rest-spread": "^6.5.0",
@@ -30,7 +30,7 @@
     "eslint": "^3.4.0",
     "eslint-plugin-babel": "^3.3.0",
     "eslint-plugin-react": "^6.7.1",
-    "express": "^4.13.4",
+    "express": "^4.14.0",
     "firebase": "^3.6.2",
     "immutable": "^3.8.1",
     "lodash": "^4.17.2",
@@ -52,9 +52,9 @@
     "style-loader": "^0.13.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.3.1",
-    "webpack": "^2.1.0-beta.25",
-    "webpack-dev-middleware": "^1.8.4",
-    "webpack-hot-middleware": "^2.13.2"
+    "webpack": "^2.2.0-rc.3",
+    "webpack-dev-middleware": "^1.9.0",
+    "webpack-hot-middleware": "^2.14.0"
   },
   "devDependencies": {
     "babel-plugin-syntax-decorators": "^6.13.0",
@@ -151,5 +151,6 @@
       "babel",
       "react"
     ]
-  }
+  },
+  "main": "index.js"
 }

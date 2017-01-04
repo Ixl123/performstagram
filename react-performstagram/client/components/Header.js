@@ -3,10 +3,8 @@ import React, {Component} from 'react';
 class Header extends Component {
 
     render() {
-        authenticated = this.props.authenticated;
-        signout = this.props.signOut;
         return (
-            <header className="header">
+            <div className="header">
                 <div className="g-row">
                     <div className="g-col">
                         <h1 className="header__title">Todo React Redux</h1>
@@ -24,7 +22,7 @@ class Header extends Component {
                         </ul>
                     </div>
                 </div>
-            </header>
+            </div>
         );
     }
 }

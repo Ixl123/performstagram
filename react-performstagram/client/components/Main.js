@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 import {paths} from '../routes';
 import {browserHistory} from 'react-router'
-
+import {Header} from './Header'
 class Main extends Component {
     /**
      * gets called whenever the state changes redux method
@@ -17,9 +17,11 @@ class Main extends Component {
         }
     }
     render() {
-        const authenticated = this.props;
+        const {auth} = this.props;
+        console.log(auth);
         const signOut = this.props.signOut;
         return (
+
             <div>
                 <header className="header">
                     <div className="g-row">
@@ -29,7 +31,7 @@ class Main extends Component {
                                 </Link>
                             </h1>
                             <ul className="header__actions">
-                                {authenticated
+                                {auth.authenticated
                                     ? <li>
                                             <button className="btn" onClick={signOut}>Sign out</button>
                                         </li>

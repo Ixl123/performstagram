@@ -10,12 +10,11 @@ import Comments from '../../client/components/Comments';
 import comments from '../../client/data/comments';
 import posts from '../../client/data/posts';
 
-
 describe('Single Component', function () {
   var result;
-  before(()=> {
+  before(() => {
     var renderer = ReactTestUtils.createRenderer();
-    
+
     const props = {
       posts,
       i: 0,
@@ -25,22 +24,8 @@ describe('Single Component', function () {
       }
     };
 
-    renderer.render(<Single {...props} />)
+    renderer.render(<Single {...props}/>)
     result = renderer.getRenderOutput();
   });
 
-  it('should render properly',()=>{
-    expect(result.type).toEqual('div');
-    expect(result.props.className).toEqual('single-photo');
-  });
-
-  it('should have the right children', ()=> {
-    let [ photo, comments ] = result.props.children;
-    expect(photo.type).toBe(Photo);
-    expect(comments.type).toBe(Comments);
-  });
-
 })
-
-
-

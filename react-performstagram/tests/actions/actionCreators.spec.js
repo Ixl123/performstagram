@@ -1,9 +1,8 @@
 import expect from 'expect';
-import { increment, addComment, removeComment } from '../../client/actions/actionCreators.js';
-
+import {increment, addComment, removeComment} from '../../client/actions/actionCreator.js';
 describe('Action Creators', () => {
 
-  describe('increment',()=> {
+  describe('increment', () => {
 
     it('should create an action to increment likes', () => {
       const expected = {
@@ -15,7 +14,7 @@ describe('Action Creators', () => {
     });
   });
 
-  describe('addComment',()=> {
+  describe('addComment', () => {
 
     it('should create an action to add a comment', () => {
       const postId = 'BAcJeJrQca9';
@@ -35,7 +34,7 @@ describe('Action Creators', () => {
 
   });
 
-  describe('removeComment',()=> {
+  describe('removeComment', () => {
 
     it('should create an action to remove a comment', () => {
       const expected = {
@@ -49,6 +48,5 @@ describe('Action Creators', () => {
     });
 
   });
-
 
 })
