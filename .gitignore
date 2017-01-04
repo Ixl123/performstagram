@@ -1,2 +1,6 @@
 node_modules/
 **/.DS_Store
+angular2-performstagram/node_modules/
+react-performstagram/node_modules/
+react-performstagram/.vscode/
+vue-performstagram/node_modules/
