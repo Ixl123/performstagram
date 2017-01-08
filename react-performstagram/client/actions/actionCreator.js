@@ -32,7 +32,7 @@ export const signInError = (error) => {
 }
 
 export const signInSuccess = (result) => {
-    return {type: 'SIGN_IN_SUCCESS', payload: result.user};
+    return {type: 'SIGN_IN_SUCCESS', payload: result};
 }
 
 export const signInWithGithub = () => {
@@ -46,7 +46,14 @@ export const signInWithGoogle = () => {
 export const signInWithTwitter = () => {
     return authenticate(new firebase.auth.TwitterAuthProvider());
 }
-
+export const signInWithTestAccount = () => {
+    return (dispatch) => {
+        firebaseAuth
+            .signInWithEmailAndPassword('default@default.de', 'default')
+            .then((result) => dispatch(signInSuccess(result)))
+            .catch((error) => dispatch(signInError(error)));
+    };
+}
 export const signOut = () => {
     return (dispatch) => {
         firebaseAuth

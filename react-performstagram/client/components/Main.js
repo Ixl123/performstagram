@@ -18,7 +18,6 @@ class Main extends Component {
     }
     render() {
         const {auth} = this.props;
-        console.log(auth);
         const signOut = this.props.signOut;
         return (
 

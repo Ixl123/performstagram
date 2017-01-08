@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 class Comments extends Component {
     renderComment(comment, i) {
-
         return (
             <div className='comment' key={i}>
                 <p>
@@ -19,10 +18,7 @@ class Comments extends Component {
         )
     }
     handleSubmit(e) {
-
         e.preventDefault();
-        console.log(this);
-        console.log(this.refs)
         const {postId} = this.props.params;
         const author = this.refs.author.value;
         const comment = this.refs.comment.value;

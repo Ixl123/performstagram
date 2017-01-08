@@ -2,15 +2,24 @@ var GitHubApi = require('github');
 var webPageTest = require('webpagetest')
 
 const wpt = new webPageTest('www.webpagetest.org', process.env.WEBPAGETEST_API_KEY)
+var myRepo = 'performstagram'
+var myOwner = 'ixl123'
 var dataAsMarkdown = '';
 wpt.runTest('https://performstagram-ec72e.firebaseapp.com/', {
     video: true,
     pollResults: 5,
     timeout: 60
 }, function (err, result) {
-    console.log(result.data.median.firstView.videoFrames);
-    convertToMarkdown(result);
+    console.log(err || result);
+    if (result) {
+        convertToMarkdown(result);
+    }
+
 })
+const humanFileSize = (size) => {
+    var i = Math.floor(Math.log(size) / Math.log(1024));
+    return (size / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + ['B', 'kB', 'MB', 'GB', 'TB'][i];
+};
 
 const convertToMarkdown = (result) => {
     console.log('FIRSTVIEW Load time:', result.data.average.firstView.loadTime)
@@ -30,6 +39,19 @@ const convertToMarkdown = (result) => {
     console.log('FIRSTVIEW Waterfall view:', result.data.runs[1].firstView.images.waterfall)
 
     dataAsMarkdown = `
+
+# Asset Sizes
+
+| File | FileSize | 
+|----------|----------|
+ ${result
+        .data
+        .runs[1]
+        .firstView
+        .requests
+        .map(request => `${request.url}|${humanFileSize(request.bytesIn)} \r\n`)
+        .join('')}
+
 # VisualMetrics
 
 | View | Time to First Byte |  Render Started  |  Visualy Completed | SpeedIndex | Load Time |
@@ -120,14 +142,23 @@ ${result
         timeout: 5000
     });
     github.authenticate({type: 'oauth', token: process.env.GIT_TOKEN});
+    /**
+     * first get all commits
+     * then get latest
+     * and push webpagetest results as comment to latest commit
+     */
     github
         .repos
-        .createCommitComment({
-            owner: 'ixl123',
-            repo: 'performstagram',
-            sha: '43b9f83fd54c303f3acd88566c2c1ecc095c5c8c',
-            body: dataAsMarkdown
-        }, function (err, res) {
-            // console.log(JSON.stringify(res));
+        .getCommits({owner: myOwner, repo: myRepo})
+        .then((allCommits) => {
+            return github
+                .repos
+                .createCommitComment({owner: myOwner, repo: myRepo, sha: allCommits[0].sha, body: dataAsMarkdown});
+        })
+        .catch((error) => {
+            console.log(`ERROR could either not get commits of the repo ${myRepo} of the owner ${myOwner}
+            or could not sent the commit to the repositorie ERRORMSG: ${error}
+            `);
         });
+
 }
