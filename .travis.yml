@@ -6,4 +6,4 @@ node_js:
   - "5"
 script: cd react-performstagram && npm install && npm test
 after_script:
-  - GIT_TOKEN=gitToken WEBPAGETEST_API_KEY=webpageTestAPIKey node githubscript.js
+  - GIT_TOKEN WEBPAGETEST_API_KEY node githubscript.js
