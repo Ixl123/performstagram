@@ -5,6 +5,18 @@ const wpt = new webPageTest('www.webpagetest.org', process.env.WEBPAGETEST_API_K
 var myRepo = 'performstagram'
 var myOwner = 'ixl123'
 var dataAsMarkdown = '';
+var github = new GitHubApi({
+    debug: true,
+    protocol: 'https',
+    host: 'api.github.com',
+    headers: {
+        'user-agent': 'My-Cool-GitHub-App'
+    },
+    Promise: require('bluebird'),
+    followRedirects: false,
+    timeout: 5000
+});
+github.authenticate({type: 'oauth', token: process.env.GIT_TOKEN})
 wpt.runTest('https://performstagram-ec72e.firebaseapp.com/', {
     video: true,
     pollResults: 5,
@@ -130,23 +142,12 @@ ${result
     `)
         .join('')}
     `
-    var github = new GitHubApi({
-        debug: true,
-        protocol: 'https',
-        host: 'api.github.com',
-        headers: {
-            'user-agent': 'My-Cool-GitHub-App'
-        },
-        Promise: require('bluebird'),
-        followRedirects: false,
-        timeout: 5000
-    });
-    github.authenticate({type: 'oauth', token: process.env.GIT_TOKEN});
     /**
      * first get all commits
      * then get latest
      * and push webpagetest results as comment to latest commit
      */
+
     github
         .repos
         .getCommits({owner: myOwner, repo: myRepo})
