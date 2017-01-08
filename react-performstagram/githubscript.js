@@ -1,6 +1,5 @@
 var GitHubApi = require('github');
 var webPageTest = require('webpagetest')
-
 const wpt = new webPageTest('www.webpagetest.org', process.env.WEBPAGETEST_API_KEY)
 var myRepo = 'performstagram'
 var myOwner = 'ixl123'
