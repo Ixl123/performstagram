@@ -16,7 +16,17 @@ var github = new GitHubApi({
     timeout: 5000
 });
 github.authenticate({type: 'oauth', token: process.env.GIT_TOKEN})
-wpt.runTest('https://performstagram-ec72e.firebaseapp.com/', {
+
+var script = wpt.scriptToString([
+    {
+        navigate: 'https://performstagram-ec72e.firebaseapp.com/sign-in'
+    }, {
+        execAndWait: `document.querySelector('button[data-reactid=".0.1.0.3"]').click()`
+    },
+    'waitForComplete'
+])
+
+wpt.runTest(script, {
     video: true,
     pollResults: 5,
     timeout: 60
