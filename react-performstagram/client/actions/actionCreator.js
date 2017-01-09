@@ -26,6 +26,9 @@ function authenticate(provider) {
 export const initAuth = (user) => {
     return {type: 'INIT_AUTH', payload: user};
 }
+export const uploadImage = (user) => {
+    return {type: 'INIT_AUTH', payload: user};
+}
 export const openModal = () => {
     return {type: 'OPEN_MODAL', modalIsOpen: true};
 }

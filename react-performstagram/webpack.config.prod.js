@@ -5,7 +5,7 @@ module.exports = {
   devtool: 'source-map',
   entry: ['./client/performstagram'],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'public'),
     filename: 'bundle.js',
     publicPath: '/static/'
   },
