@@ -29,7 +29,7 @@ var script = wpt.scriptToString([
 wpt.runTest(script, {
     video: true,
     pollResults: 5,
-    timeout: 60
+    timeout: 600
 }, function (err, result) {
     console.log(err || result);
     if (result) {
@@ -57,24 +57,35 @@ const convertToMarkdown = (result) => {
     console.log('(FIRSTVIEW Fully loaded) Requests:', result.data.average.firstView.requestsFull)
     console.log('(FIRSTVIEW Fully loaded) Bytes in:', result.data.average.firstView.bytesIn)
 
-    console.log('FIRSTVIEW Waterfall view:', result.data.runs[1].firstView.images.waterfall)
+    console.log('FIRSTVIEW Waterfall view:', result.data.runs['1'].firstView.steps[1].images.waterfall)
 
     dataAsMarkdown = `
 
 # Asset Sizes
-
+## firstView sign in
 | File | FileSize | 
 |----------|----------|
  ${result
         .data
-        .runs[1]
+        .runs['1']
         .firstView
+        .steps[0]
         .requests
         .map(request => `${request.url}|${humanFileSize(request.bytesIn)} \r\n`)
         .join('')}
-
+## firstView grid
+| File | FileSize | 
+|----------|----------|
+ ${result
+        .data
+        .runs['1']
+        .firstView
+        .steps[1]
+        .requests
+        .map(request => `${request.url}|${humanFileSize(request.bytesIn)} \r\n`)
+        .join('')}
 # VisualMetrics
-
+## Metrics Average
 | View | Time to First Byte |  Render Started  |  Visualy Completed | SpeedIndex | Load Time |
 |----------|----------|:-------------:|------:| ------:|------:|
 FirstView  | ${result
@@ -124,24 +135,44 @@ RepeatView | ${result
 ## firstView
 ![alt text](${result
         .data
-        .runs[1]
+        .runs['1']
         .firstView
+        .steps[0]
         .images
         .waterfall})
 
 ## repeatView
 ![alt text](${result
         .data
-        .runs[1]
-        .repeatView
+        .runs['1']
+        .firstView
+        .steps[1]
         .images
         .waterfall})
 
-# FilmStrip 
+# FilmStrip
+## SignIn First View
 ${result
         .data
-        .median
+        .runs[1]
         .firstView
+        .steps[0]
+        .videoFrames
+        .map(item => `
+| ${item.time} milliseconds|
+|--------------|
+| ![alt text](${item.image})|
+| ${item.VisuallyComplete}|
+    `)
+        .join('')}
+        
+
+## Grid FirstView 
+${result
+        .data
+        .runs['1']
+        .firstView
+        .steps[1]
         .videoFrames
         .map(item => `
 | ${item.time} milliseconds|

@@ -1,14 +1,24 @@
 import React, {Component} from 'react';
 import Photo from './Photo';
+import AddPhoto from './AddPhoto'
 class PhotoGrid extends Component {
-    render() {
-        return (
-            <div className='photo-grid'>
-                {this
-                    .props
-                    .posts
-                    .map((post, i) => <Photo {...this.props} key={i} i={i} post={post}/>)}
 
+    render() {
+        console.log(this.props)
+
+        return (
+
+            <div>
+                <div className="aligner">
+                    <AddPhoto {...this.props} className="align-center"></AddPhoto>
+                </div>
+                <div className='photo-grid'>
+                    {this
+                        .props
+                        .posts
+                        .map((post, i) => <Photo {...this.props} key={i} i={i} post={post}/>)}
+
+                </div>
             </div>
         );
     }

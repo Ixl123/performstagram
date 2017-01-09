@@ -26,7 +26,12 @@ function authenticate(provider) {
 export const initAuth = (user) => {
     return {type: 'INIT_AUTH', payload: user};
 }
-
+export const openModal = () => {
+    return {type: 'OPEN_MODAL', modalIsOpen: true};
+}
+export const closeModal = () => {
+    return {type: 'CLOSE_MODAL', modalIsOpen: false};
+}
 export const signInError = (error) => {
     return {type: 'SIGN_IN_ERROR', payload: error};
 }

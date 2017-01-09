@@ -5,7 +5,7 @@ import * as actionCreator from '../actions/actionCreator';
 import Main from './Main';
 
 export const mapStateToPros = (state) => {
-    return {posts: state.posts, comments: state.comments, auth: state.auth};
+    return {posts: state.posts, comments: state.comments, auth: state.auth, modal: state.modal};
 }
 
 export const mapDispatchToProps = (dispatch) => {
