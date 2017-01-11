@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 import {Link} from 'react-router';
 import CSSTansitionGroup from 'react-addons-css-transition-group';
 class Photo extends Component {
+    componentWillMount() {
+        this
+            .props
+            .loadPosts();
+    }
     render() {
         const {post, i, comments} = this.props;
         return (
@@ -24,8 +29,8 @@ class Photo extends Component {
                             <button
                                 onClick={this
                                 .props
-                                .increment
-                                .bind(null, i)}className="like">&hearts; {post.likes}</button>
+                                .updatePost
+                                .bind(null, i, post)}className="like">&hearts; {post.likes}</button>
                             <Link className='button' to={`/view/${post.code}`}>
                                 <span className="comment-count">
 

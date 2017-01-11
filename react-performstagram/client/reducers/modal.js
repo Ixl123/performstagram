@@ -1,3 +1,4 @@
+import {OPEN_MODAL, CLOSE_MODAL, ADD_FILE} from '../actions/actionTypes'
 const modal = (state = [], action) => {
     switch (action.type) {
         case 'OPEN_MODAL':
@@ -9,6 +10,11 @@ const modal = (state = [], action) => {
             return {
                 ...state,
                 modalIsOpen: action.modalIsOpen
+            }
+        case 'ADD_FILE':
+            return {
+                ...state,
+                acceptedFile: action.acceptedFile
             }
         default:
 

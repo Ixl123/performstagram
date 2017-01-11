@@ -10,9 +10,10 @@ import rootReducer from './reducers/index';
 import posts from './data/posts.1';
 import comments from './data/comments.1';
 import AuthState from './reducers/auth'
+import PostState from './reducers/posts'
 import modal from './data/modal'
 const defaultState = {
-    posts,
+
     comments,
     modal
 }

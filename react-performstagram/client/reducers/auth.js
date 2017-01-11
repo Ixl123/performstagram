@@ -1,21 +1,23 @@
 import {Record} from 'immutable';
-
-export const AuthState = new Record({authenticated: false, id: null});
-
+import {INIT_AUTH, SIGN_IN_SUCCESS, SIGN_OUT_SUCCESS} from '../actions/actionTypes'
+export const AuthState = new Record({authenticated: false, id: null, displayName: null});
 const auth = (state = new AuthState(), {payload, type}) => {
     switch (type) {
-        case 'INIT_AUTH':
-        case 'SIGN_IN_SUCCESS':
+
+        case INIT_AUTH:
+        case SIGN_IN_SUCCESS:
+            console.log(payload);
             return state.merge({
                 authenticated: !!payload,
                 id: payload
                     ? payload.uid
+                    : null,
+                displayName: payload
+                    ? payload.displayName
                     : null
             });
-
-        case 'SIGN_OUT_SUCCESS':
+        case SIGN_OUT_SUCCESS:
             return new AuthState();
-
         default:
             return state;
     }

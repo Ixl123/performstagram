@@ -1,10 +1,11 @@
 import {firebaseDb} from './firebase';
 
 export class FirebaseList {
-    constructor(actions, modelClass, path = null) {
+    constructor(actions, path = null) {
+        debugger;
         this._actions = actions;
-        this._modelClass = modelClass;
         this._path = path;
+
     }
 
     get path() {
@@ -16,12 +17,21 @@ export class FirebaseList {
     }
 
     push(value) {
+        debugger;
+        console.log(value);
+        console.log(this._path);
+        console.log(firebaseDb);
+
         return new Promise((resolve, reject) => {
             firebaseDb
-                .ref(this._path)
-                .push((value, error) => error
-                    ? reject(error)
-                    : resolve());
+                .ref(this._path + '/')
+                .push(value)
+                .then(() => {
+                    resolve();
+                })
+                .catch((error) => {
+                    reject(error);
+                })
         });
     }
 
@@ -49,7 +59,7 @@ export class FirebaseList {
         return new Promise((resolve, reject) => {
             firebaseDb
                 .ref(`${this._path}/${key}`)
-                .update((value, error) => error
+                .update(value, error => error
                     ? reject(error)
                     : resolve());
         });
@@ -74,6 +84,7 @@ export class FirebaseList {
         });
 
         ref.on('child_changed', (snapshot) => {
+            debugger;
             emit(this._actions.onChange(this.unwrapSnapshot(snapshot)));
         });
 
@@ -89,8 +100,9 @@ export class FirebaseList {
     }
 
     unwrapSnapshot(snapshot) {
-        let attrs = snapshot.val();
-        attrs.key = snapshot.key;
-        return new this._modelClass(attrs);
+        const attrs = snapshot.val();
+        const key = snapshot.key;
+        attrs['code'] = snapshot.key;
+        return attrs;
     }
 }

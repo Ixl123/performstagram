@@ -44,10 +44,9 @@ class Comments extends Component {
                     onSubmit={this
                     .handleSubmit
                     .bind(this)}>
-                    <input type='text' ref='author' value={this.props.auth.id}/>
+                    <input type='text' ref='author' value={this.props.auth.displayName}/>
                     <input type='text' ref='comment' placeholder='comment'/>
                     <input type='submit' hidden/>
-
                 </form>
             </div>
         );

@@ -1,18 +1,23 @@
 import React, {Component} from 'react';
 import Photo from './Photo';
 import AddPhoto from './AddPhoto'
+
 class PhotoGrid extends Component {
 
+    componentWillMount() {
+        this
+            .props
+            .loadPosts();
+    }
     render() {
-        console.log(this.props)
 
         return (
-
             <div>
                 <div className="aligner">
                     <AddPhoto {...this.props} className="align-center"></AddPhoto>
                 </div>
                 <div className='photo-grid'>
+
                     {this
                         .props
                         .posts

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import Modal from 'react-modal';
 var Dropzone = require('react-dropzone');
-
+const uuidV4 = require('uuid/v4');
+import {firebaseAuth} from './firebase'
 const appElement = document.getElementById('root');
 const customStyles = {
     content: {
@@ -17,8 +18,41 @@ const customStyles = {
 class AddPhoto extends Component {
 
     onDrop(acceptedFiles, rejectedFiles) {
+
         console.log('Accepted files: ', acceptedFiles);
         console.log('Rejected files: ', rejectedFiles);
+    }
+    handleSubmit(e) {
+        e.preventDefault();
+        debugger;
+        this
+            .props
+            .closeModal();
+
+        const file = this.props.modal.acceptedFile;
+        const author = this.props.auth.displayName;
+        const title = this.refs.title.value;
+        const caption = this.refs.caption.value;
+        const id = uuidV4()
+
+        const newPost = {
+            author,
+            caption,
+            title,
+            id,
+            file
+        }
+
+        this
+            .props
+            .createPost(newPost)
+
+        // reset form
+        this
+            .refs
+            .uploadForm
+            .reset();
+
     }
     render() {
 
@@ -31,16 +65,20 @@ class AddPhoto extends Component {
                     style={customStyles}
                     contentLabel="Example Modal">
                     <h2 ref="subtitle">Upload a image</h2>
-                    <Dropzone onDrop={this.onDrop}>
+                    <Dropzone onDrop={this.props.onDrop} multiple={false} accept={'image/*'}>
                         <div>Try dropping some files here, or click to select files to upload.</div>
                     </Dropzone>
-                    <form ref='commentForm' className='comment-form'>
-                        <input type='text' ref='author' placeholder='author'/>
-                        <input type='text' ref='description' placeholder='description'/>
-                        <input type='submit' hidden/>
+                    <form
+                        ref='uploadForm'
+                        className='comment-form'
+                        onSubmit={this
+                        .handleSubmit
+                        .bind(this)}>
+                        <input type='text' ref='title' placeholder='title'/>
+                        <input type='text' ref='caption' placeholder='caption'/>
+                        <input type='submit'/>
                     </form>
-                    <button onClick={this.props.closeModal}>close</button>
-                    <button onClick={this.props.uploadImage}>Submit</button>
+
                 </Modal>
             </div>
         );
