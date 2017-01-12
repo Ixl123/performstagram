@@ -6,7 +6,6 @@ const auth = (state = new AuthState(), {payload, type}) => {
 
         case INIT_AUTH:
         case SIGN_IN_SUCCESS:
-            console.log(payload);
             return state.merge({
                 authenticated: !!payload,
                 id: payload

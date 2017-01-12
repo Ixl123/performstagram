@@ -2,11 +2,14 @@ import React, {Component} from 'react';
 
 class Comments extends Component {
     renderComment(comment, i) {
+
         return (
             <div className='comment' key={i}>
                 <p>
-                    <strong>{comment.user}</strong>
-                    {comment.text}
+                    <strong>{comment['author']}</strong>
+                    {typeof comment === 'object'
+                        ? comment['comment']
+                        : false}
                     <button
                         className='remove-comment'
                         onClick={this
@@ -19,12 +22,18 @@ class Comments extends Component {
     }
     handleSubmit(e) {
         e.preventDefault();
+
         const {postId} = this.props.params;
-        const author = this.refs.author.value;
+        const author = this.props.auth.displayName;
         const comment = this.refs.comment.value;
+        const newComment = {
+            postId,
+            author,
+            comment
+        }
         this
             .props
-            .addComment(postId, author, comment);
+            .createComment(newComment);
         this
             .refs
             .commentForm
@@ -32,12 +41,20 @@ class Comments extends Component {
 
     }
     render() {
+
         return (
             <div className='comments'>
-                {this
-                    .props
-                    .postComments
-                    .map(this.renderComment.bind(this))}
+                {this.props.postComments !== undefined
+                    ? Object
+                        .keys(this.props.postComments)
+                        .map((key, i) => {
+
+                            if (key['code'] !== this.props.params.postId) {
+                                return this.renderComment(this.props.postComments[key], i)
+                            }
+                        })
+                    : null}
+
                 <form
                     ref='commentForm'
                     className='comment-form'

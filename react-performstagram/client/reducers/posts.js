@@ -6,9 +6,7 @@ import {
     UPDATE_POST_SUCCESS,
     UPDATE_POST_ERROR
 } from '../actions/actionTypes'
-import {List, Record} from 'immutable';
 
-// export const PostState = new Record({posts: new List()});
 const posts = (state = [], action) => {
     switch (action.type) {
         case CREATE_POST_ERROR:

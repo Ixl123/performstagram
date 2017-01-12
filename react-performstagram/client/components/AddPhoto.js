@@ -17,14 +17,9 @@ const customStyles = {
 
 class AddPhoto extends Component {
 
-    onDrop(acceptedFiles, rejectedFiles) {
-
-        console.log('Accepted files: ', acceptedFiles);
-        console.log('Rejected files: ', rejectedFiles);
-    }
     handleSubmit(e) {
         e.preventDefault();
-        debugger;
+
         this
             .props
             .closeModal();

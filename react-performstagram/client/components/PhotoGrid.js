@@ -8,6 +8,9 @@ class PhotoGrid extends Component {
         this
             .props
             .loadPosts();
+        this
+            .props
+            .loadComments();
     }
     render() {
 

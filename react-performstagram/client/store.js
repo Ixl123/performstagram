@@ -6,19 +6,12 @@ import thunk from 'redux-thunk';
 // import the root reducer
 
 import rootReducer from './reducers/index';
-// import defaultstate
-import posts from './data/posts.1';
-import comments from './data/comments.1';
-import AuthState from './reducers/auth'
-import PostState from './reducers/posts'
+
 import modal from './data/modal'
 const defaultState = {
-
-    comments,
     modal
 }
-console.log(defaultState);
-debugger;
+
 const middleware = applyMiddleware(thunk);
 
 const enhancers = compose(middleware, window.devToolsExtension

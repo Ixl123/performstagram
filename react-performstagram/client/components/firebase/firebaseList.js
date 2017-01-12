@@ -1,5 +1,7 @@
 import {firebaseDb} from './firebase';
-
+/**
+ * Generic list which can be used to handle lists inside a Firebase datatabase.
+ */
 export class FirebaseList {
     constructor(actions, path = null) {
         debugger;
@@ -17,11 +19,6 @@ export class FirebaseList {
     }
 
     push(value) {
-        debugger;
-        console.log(value);
-        console.log(this._path);
-        console.log(firebaseDb);
-
         return new Promise((resolve, reject) => {
             firebaseDb
                 .ref(this._path + '/')
@@ -66,11 +63,13 @@ export class FirebaseList {
     }
 
     subscribe(emit) {
+        debugger;
         let ref = firebaseDb.ref(this._path);
         let initialized = false;
         let list = [];
 
         ref.once('value', () => {
+            debugger;
             initialized = true;
             emit(this._actions.onLoad(list));
         });
