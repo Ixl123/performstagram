@@ -6,6 +6,7 @@ import Single from './components/Single';
 
 export const paths = {
     ROOT: '/',
+    NOMATCH: '/*',
     SIGN_IN: '/sign-in',
     PHOTO_GRID: '/',
     SINGLE_PHOTO: '/view/:postId'
@@ -18,14 +19,18 @@ export const paths = {
  */
 const requireAuth = (getState) => {
     return (nextState, replace) => {
+        console.log('ICH WERDE Benötigt teste ob nicht authentifiziert')
         if (!isAuthenticated(getState())) {
             replace(paths.SIGN_IN);
+
         }
     };
 };
 
 const requireUnauth = (getState) => {
     return (nextState, replace) => {
+        console.log('ICH WERDE Benötigt teste ob authentifiziert')
+
         if (isAuthenticated(getState())) {
             replace(paths.PHOTO_GRID);
         }
@@ -49,6 +54,10 @@ export const getRoutes = (getState) => {
             }, {
                 path: paths.SINGLE_PHOTO,
                 component: Single,
+                onEnter: requireAuth(getState)
+            }, {
+                path: paths.NOMATCH,
+                component: PhotoGrid,
                 onEnter: requireAuth(getState)
             }
         ]

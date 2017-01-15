@@ -92,8 +92,7 @@
           [
             "react-transform",
             {
-              "transforms": [
-                {
+              "transforms": [{
                   "transform": "react-transform-hmr",
                   "imports": [
                     "react"

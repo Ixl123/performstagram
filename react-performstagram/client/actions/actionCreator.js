@@ -70,6 +70,7 @@ export const updatePostError = (error) => {
     return {type: actionTypes.UPDATE_POST_ERROR, payload: error}
 }
 export const updatePost = (index, post) => {
+    debugger;
     return (dispatch) => {
         post.likes = post.likes + 1;
         const newPost = {
@@ -78,7 +79,6 @@ export const updatePost = (index, post) => {
             id: post.id,
             likes: post.likes,
             title: post.title
-
         }
         postList
             .update(post.code, newPost)
@@ -125,36 +125,37 @@ export const loadComments = () => {
 export const updateCommentSuccess = (comment) => {
     return {type: actionTypes.UPDATE_COMMENTS_SUCCESS, payload: comment};
 }
-export const addComment = (postId, author, comment) => {
+
+export const removeComment = (commentPath) => {
+    debugger;
     return (dispatch) => {
-        post.likes = post.likes + 1;
-        const newPost = {
-            caption: post.caption,
-            display_src: post.display_src,
-            id: post.id,
-            likes: post.likes,
-            title: post.title
-        }
-        commentList.path = 'comments';
-
+        commentList._path = 'comments';
         commentList
-            .update(post.code, newPost)
-            .catch((error) => dispatch(updatePostError(error)));
-
+            .remove(commentPath)
+            .catch((error) => dispatch(deleteTaskError(error)));
     };
-
-};
-export const removeComment = (postId, i) => ({type: 'REMOVE_COMMENT', i, postId});
+}
 
 export const loadCommentSuccess = (comments) => {
 
     return {type: actionTypes.LOAD_COMMENTS_SUCCESS, payload: comments};
 }
+export const unloadPosts = () => {
+    postList.unsubscribe();
+    return {type: actionTypes.UNLOAD_POSTS_SUCCESS};
+}
+export const unloadComments = () => {
+    commentList.unsubscribe();
+    return {type: actionTypes.UNLOAD_COMMENTS_SUCCESS};
+}
 export const createCommentSuccess = (comments) => {
 
     return {type: actionTypes.CREATE_COMMENTS_SUCCESS, payload: comments}
 }
-export const removeCommentSuccess = () => {}
+export const removeCommentSuccess = (comments) => {
+
+    return {type: actionTypes.REMOVE_COMMENTS_SUCCESS, payload: comments}
+}
 
 /**
  * AUTH
@@ -168,6 +169,7 @@ function authenticate(provider) {
     };
 }
 export const initAuth = (user) => {
+
     return {type: actionTypes.INIT_AUTH, payload: user};
 }
 export const signInError = (error) => {
@@ -188,9 +190,6 @@ export const signInWithGoogle = () => {
     return authenticate(new firebase.auth.GoogleAuthProvider());
 }
 
-export const signInWithTwitter = () => {
-    return authenticate(new firebase.auth.TwitterAuthProvider());
-}
 export const signInWithTestAccount = () => {
     return (dispatch) => {
         firebaseAuth

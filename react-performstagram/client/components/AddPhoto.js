@@ -18,13 +18,13 @@ const customStyles = {
 class AddPhoto extends Component {
 
     handleSubmit(e) {
+        console.log('#################UPLOAD TRIGGERED#################')
         e.preventDefault();
 
+        const file = this.props.modal.acceptedFile;
         this
             .props
             .closeModal();
-
-        const file = this.props.modal.acceptedFile;
         const author = this.props.auth.displayName;
         const title = this.refs.title.value;
         const caption = this.refs.caption.value;
@@ -41,7 +41,6 @@ class AddPhoto extends Component {
         this
             .props
             .createPost(newPost)
-
         // reset form
         this
             .refs
@@ -58,10 +57,13 @@ class AddPhoto extends Component {
                     isOpen={this.props.modal.modalIsOpen}
                     onRequestClose={this.props.closeModal}
                     style={customStyles}
-                    contentLabel="Example Modal">
+                    contentLabel="Upload Image Modal">
                     <h2 ref="subtitle">Upload a image</h2>
                     <Dropzone onDrop={this.props.onDrop} multiple={false} accept={'image/*'}>
                         <div>Try dropping some files here, or click to select files to upload.</div>
+                        {this.props.modal.acceptedFile
+                            ? <img src={this.props.modal.acceptedFile.preview}/>
+                            : null}
                     </Dropzone>
                     <form
                         ref='uploadForm'
@@ -71,7 +73,10 @@ class AddPhoto extends Component {
                         .bind(this)}>
                         <input type='text' ref='title' placeholder='title'/>
                         <input type='text' ref='caption' placeholder='caption'/>
-                        <input type='submit'/>
+                        <div className="modal-grid__button">
+                            <button className="modal-grid__button_submit">
+                                <input type='submit' value="Upload"/></button>
+                        </div>
                     </form>
 
                 </Modal>

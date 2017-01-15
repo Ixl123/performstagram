@@ -4,10 +4,8 @@ import {firebaseDb} from './firebase';
  */
 export class FirebaseList {
     constructor(actions, path = null) {
-        debugger;
         this._actions = actions;
         this._path = path;
-
     }
 
     get path() {
@@ -33,6 +31,7 @@ export class FirebaseList {
     }
 
     remove(key) {
+        debugger;
         return new Promise((resolve, reject) => {
             firebaseDb
                 .ref(`${this._path}/${key}`)
@@ -69,15 +68,18 @@ export class FirebaseList {
         let list = [];
 
         ref.once('value', () => {
-            debugger;
+
             initialized = true;
             emit(this._actions.onLoad(list));
         });
 
         ref.on('child_added', (snapshot) => {
+
             if (initialized) {
+                debugger;
                 emit(this._actions.onAdd(this.unwrapSnapshot(snapshot)));
             } else {
+                debugger;
                 list.push(this.unwrapSnapshot(snapshot));
             }
         });

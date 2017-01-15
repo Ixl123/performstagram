@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Photo from './Photo';
 import Comments from './Comments';
+
 class Single extends Component {
     componentWillMount() {
         this
@@ -8,8 +9,18 @@ class Single extends Component {
             .loadPosts();
         this
             .props
-            .loadComments();
+            .loadComments()
     }
+
+    componentWillUnmount() {
+        this
+            .props
+            .unloadPosts();
+        this
+            .props
+            .unloadComments()
+    }
+
     render() {
         const {postId} = this.props.params;
 
@@ -31,6 +42,7 @@ class Single extends Component {
         return (
             <div className='single-photo'>
                 <Photo i={i} post={post} {...this.props}/>
+
                 <Comments postComments={postComments} {...this.props}/>
             </div>
         );

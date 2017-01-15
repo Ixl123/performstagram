@@ -22,12 +22,6 @@ class SignIn extends Component {
                         &nbsp; Sign in with Google</button>
                     <button
                         className="btn sign-in__button"
-                        onClick={this.props.signInWithTwitter}
-                        type="button">
-                        <i className="fa fa-twitter fa-lg" aria-hidden="true"></i>
-                        &nbsp; Sign in with Twitter</button>
-                    <button
-                        className="btn sign-in__button"
                         onClick={this.props.signInWithTestAccount}
                         type="button">
                         <i className="fa fa-user fa-lg" aria-hidden="true"></i>

@@ -24,22 +24,22 @@ const comments = (state = [], action) => {
         case LOAD_COMMENTS_SUCCESS:
             return action.payload;
         case CREATE_COMMENTS_SUCCESS:
-            debugger;
             return [
                 action.payload, ...state
             ]
         case UPDATE_COMMENTS_SUCCESS:
-            debugger;
             return state.map((comment, index) => {
                 if (comment.code !== action.payload.code) {
                     // This isn't the item we care about - keep it as-is
                     return comment;
                 }
                 // Otherwise, this is the one we want - return an updated value
-                return {
-                    ...comments,
-                    ...action.payload
-                };
+                return action.payload
+
+            });
+        case REMOVE_COMMENTS_SUCCESS:
+            return state.filter((comment, index) => {
+                return comment.code !== action.payload.code
             });
         default:
             return state;

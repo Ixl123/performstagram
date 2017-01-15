@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 class Comments extends Component {
-    renderComment(comment, i) {
+    renderComment(comment, i, pathToComment, path) {
 
         return (
             <div className='comment' key={i}>
@@ -15,7 +15,7 @@ class Comments extends Component {
                         onClick={this
                         .props
                         .removeComment
-                        .bind(null, this.props.params.postId, i)}>&times;</button>
+                        .bind(null, `${path}/${pathToComment}`)}>&times;</button>
                 </p>
             </div>
         )
@@ -48,24 +48,24 @@ class Comments extends Component {
                     ? Object
                         .keys(this.props.postComments)
                         .map((key, i) => {
+                            return key !== 'code'
+                                ? this.renderComment(this.props.postComments[key], i, key, this.props.postComments.code)
+                                : null
 
-                            if (key['code'] !== this.props.params.postId) {
-                                return this.renderComment(this.props.postComments[key], i)
-                            }
                         })
                     : null}
-
                 <form
                     ref='commentForm'
                     className='comment-form'
                     onSubmit={this
                     .handleSubmit
                     .bind(this)}>
-                    <input type='text' ref='author' value={this.props.auth.displayName}/>
+                    <input type='text' ref='author' value={this.props.auth.displayName} readOnly/>
                     <input type='text' ref='comment' placeholder='comment'/>
                     <input type='submit' hidden/>
                 </form>
             </div>
+
         );
     }
 }

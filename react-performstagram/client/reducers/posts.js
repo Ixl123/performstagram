@@ -4,7 +4,8 @@ import {
     LOAD_POSTS_SUCCESS,
     UPLOAD_FILE_REQUEST,
     UPDATE_POST_SUCCESS,
-    UPDATE_POST_ERROR
+    UPDATE_POST_ERROR,
+    UNLOAD_POSTS_SUCCESS
 } from '../actions/actionTypes'
 
 const posts = (state = [], action) => {
@@ -18,7 +19,6 @@ const posts = (state = [], action) => {
             return [
                 action.payload, ...state
             ];
-
         case LOAD_POSTS_SUCCESS:
             return action
                 .payload
@@ -35,8 +35,6 @@ const posts = (state = [], action) => {
                     ...action.payload
                 };
             });
-        case UPDATE_POST_ERROR:
-            return state;
         default:
             return state;
     }

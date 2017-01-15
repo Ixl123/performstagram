@@ -9,7 +9,8 @@ const modal = (state = [], action) => {
         case 'CLOSE_MODAL':
             return {
                 ...state,
-                modalIsOpen: action.modalIsOpen
+                modalIsOpen: action.modalIsOpen,
+                acceptedFile: null
             }
         case 'ADD_FILE':
             return {

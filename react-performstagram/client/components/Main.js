@@ -3,6 +3,10 @@ import {Link} from 'react-router';
 import {paths} from '../routes';
 import {browserHistory} from 'react-router'
 class Main extends Component {
+    constructor() {
+        super();
+        console.log('constructor');
+    }
     /**
      * gets called whenever the state changes redux method
      */
@@ -10,11 +14,16 @@ class Main extends Component {
         const {auth} = this.props;
 
         if (auth.authenticated && !nextProps.auth.authenticated) {
+
             browserHistory.replace(paths.SIGN_IN);
+
         } else if (!auth.authenticated && nextProps.auth.authenticated) {
+
             browserHistory.replace(paths.PHOTO_GRID);
+
         }
     }
+
     render() {
         const {auth} = this.props;
         const signOut = this.props.signOut;
