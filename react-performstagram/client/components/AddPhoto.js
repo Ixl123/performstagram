@@ -18,7 +18,7 @@ const customStyles = {
 class AddPhoto extends Component {
 
     handleSubmit(e) {
-        console.log('#################UPLOAD TRIGGERED#################')
+
         e.preventDefault();
 
         const file = this.props.modal.acceptedFile;

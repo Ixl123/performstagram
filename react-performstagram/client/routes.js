@@ -19,7 +19,6 @@ export const paths = {
  */
 const requireAuth = (getState) => {
     return (nextState, replace) => {
-        console.log('ICH WERDE Benötigt teste ob nicht authentifiziert')
         if (!isAuthenticated(getState())) {
             replace(paths.SIGN_IN);
 
@@ -29,8 +28,6 @@ const requireAuth = (getState) => {
 
 const requireUnauth = (getState) => {
     return (nextState, replace) => {
-        console.log('ICH WERDE Benötigt teste ob authentifiziert')
-
         if (isAuthenticated(getState())) {
             replace(paths.PHOTO_GRID);
         }

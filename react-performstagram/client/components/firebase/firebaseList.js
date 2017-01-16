@@ -31,7 +31,6 @@ export class FirebaseList {
     }
 
     remove(key) {
-        debugger;
         return new Promise((resolve, reject) => {
             firebaseDb
                 .ref(`${this._path}/${key}`)
@@ -62,7 +61,6 @@ export class FirebaseList {
     }
 
     subscribe(emit) {
-        debugger;
         let ref = firebaseDb.ref(this._path);
         let initialized = false;
         let list = [];
@@ -76,16 +74,13 @@ export class FirebaseList {
         ref.on('child_added', (snapshot) => {
 
             if (initialized) {
-                debugger;
                 emit(this._actions.onAdd(this.unwrapSnapshot(snapshot)));
             } else {
-                debugger;
                 list.push(this.unwrapSnapshot(snapshot));
             }
         });
 
         ref.on('child_changed', (snapshot) => {
-            debugger;
             emit(this._actions.onChange(this.unwrapSnapshot(snapshot)));
         });
 

@@ -3,10 +3,7 @@ import {Link} from 'react-router';
 import {paths} from '../routes';
 import {browserHistory} from 'react-router'
 class Main extends Component {
-    constructor() {
-        super();
-        console.log('constructor');
-    }
+
     /**
      * gets called whenever the state changes redux method
      */

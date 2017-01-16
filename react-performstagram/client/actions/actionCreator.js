@@ -42,7 +42,7 @@ export const createPost = (newPost) => {
             let percenTageUploaded = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 
         }, (error) => {
-            console.log(error);
+            dispatch(uploadFileError);
         }, () => {
 
             var downloadURL = uploadTask.snapshot.downloadURL;
@@ -70,7 +70,6 @@ export const updatePostError = (error) => {
     return {type: actionTypes.UPDATE_POST_ERROR, payload: error}
 }
 export const updatePost = (index, post) => {
-    debugger;
     return (dispatch) => {
         post.likes = post.likes + 1;
         const newPost = {
@@ -110,8 +109,6 @@ export const createComment = (newComment) => {
  */
 export const loadComments = () => {
     return (dispatch) => {
-        debugger;
-
         commentList.path = 'comments';
         commentList._actions = {
             onAdd: createCommentSuccess,
@@ -127,7 +124,6 @@ export const updateCommentSuccess = (comment) => {
 }
 
 export const removeComment = (commentPath) => {
-    debugger;
     return (dispatch) => {
         commentList._path = 'comments';
         commentList
@@ -227,7 +223,7 @@ export const uploadFileRequest = () => {
     return {type: actionTypes.UPLOAD_FILE_REQUEST}
 }
 export const uploadFileError = (error) => {
-    return {type: actionTypes.UPLOAD_FILE_ERROR}
+    return {type: actionTypes.UPLOAD_FILE_ERROR, payload: error}
 }
 
 export const openModal = () => {
