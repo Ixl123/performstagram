@@ -5,33 +5,34 @@ import 'rxjs/add/operator/take';
 import {Injectable} from '@angular/core';
 import {CanActivate, Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
-import {NewAuthService} from '../services/newauth.service';
+import {AuthService} from '../services/auth.service';
 import {Store} from '@ngrx/store';
+import {Auth} from '../auth'
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  authenticaded : Observable < boolean >;
 
-  constructor(public store : Store < any >, private router : Router) {
-    this.authenticaded = this
-      .store
-      .select(state => state.auth.authenticated);
-  }
+  constructor(public store : Store < any >, private router : Router, private auth : AuthService) {}
 
   canActivate() : Observable < boolean > {
-    debugger;
     return this
-      .authenticaded
+      .auth
+      .auth$
       .take(1)
       .map(authState => !!authState)
       .do 
         (authenticated => {
-          debugger;
           if (!authenticated) {
             this
               .router
-              .navigate(['/']);
+              .navigate(['/sign-in']);
           }
         });
       }
   }
+
+// {     return new Promise((resolve, reject) => {       if
+// (this.auth.authenticated) {         resolve(true);       } else {         if
+// (this.auth.pending) {           this             .auth             .auth$
+// .subscribe(() => {               resolve(this.auth.authenticated);   });    }
+// else {           resolve(false);         }       } });   }

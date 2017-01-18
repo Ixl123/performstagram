@@ -1,0 +1,18 @@
+<div *ngFor="let post of posts | async ">
+    <figure class='grid-figure'>
+        <div class="grid-photo-wrap">
+            <img src={{post.display_src}} alt={{post.caption}} class='grid-photo' />
+            <figcaption>
+                <p>{{post.caption}}</p>
+                <div class="control-buttons">
+                    <button onClick={} class="like">&hearts; {{post.likes}}</button>
+                    <button>
+                        <span class="comment-count">
+                            <span class="speech-bubble"></span> &nbsp; 1
+                        </span>
+                    </button>
+                </div>
+            </figcaption>
+        </div>
+    </figure>
+</div>

@@ -5,11 +5,11 @@ import {Routes, RouterModule} from '@angular/router';
 import {SignInComponent} from './components/sign-in.component';
 import {AuthGuard} from './guards/auth.guard';
 import {UnauthGuard} from './guards/unauth.guard';
-import {NewAuthService} from './services/newauth.service';
+import {AuthService} from './services/auth.service';
 import AuthActions from './auth.actions'
 const routes : Routes = [
   {
-    path: '',
+    path: 'sign-in',
     component: SignInComponent,
     canActivate: [UnauthGuard]
   }
@@ -20,10 +20,10 @@ const routes : Routes = [
   imports: [
     CommonModule, RouterModule.forChild(routes)
   ],
-  providers: [AuthGuard, NewAuthService, UnauthGuard, AuthActions]
+  providers: [AuthGuard, AuthService, UnauthGuard, AuthActions]
 })
 
 export class AuthModule {}
 export {AuthGuard};
 export {UnauthGuard};
-export {NewAuthService};
+export {AuthService};

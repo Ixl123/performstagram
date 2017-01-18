@@ -1,10 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 
-@Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'app-header',
-    styles: [require('./_header.styl').toString()],
-    template: `
+@Component({changeDetection: ChangeDetectionStrategy.OnPush, selector: 'app-header', template: `
     <div>
                 <header class="header">
                     <div class="header__wrapper">
@@ -29,8 +25,7 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@
                     </div>
                 </header>
             </div>
-  `
-})
+  `})
 
 export class AppHeaderComponent {
     @Input()authenticated : boolean;

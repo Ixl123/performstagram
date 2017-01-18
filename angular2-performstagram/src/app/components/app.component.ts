@@ -1,14 +1,11 @@
-import {Component} from '@angular/core';
-import {NewAuthService} from '../../auth';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../auth/auth.module';
 import {Store} from '@ngrx/store';
 import {Router} from '@angular/router';
 
 import {Observable} from 'rxjs/Rx';
 
-@Component({
-  selector: 'app',
-  styles: [require('./app.styl').toString()],
-  template: `
+@Component({selector: 'app', template: `
     <app-header
       [authenticated]="authenticated"
       (signOut)="signOut()"></app-header>
@@ -17,12 +14,12 @@ import {Observable} from 'rxjs/Rx';
       <router-outlet></router-outlet>
     </main>
     
-  `
-})
+  `})
 
 export class AppComponent {
   authenticated : Observable < boolean >;
-  constructor(private router : Router, public store : Store < any >, private auth : NewAuthService) {
+  constructor(private auth : AuthService, private router : Router, public store : Store < any >) {
+    console.log('APP COMPONENT CREATED');
     this.authenticated = store.select((state) => {
       return state.auth.authenticated
     })
@@ -30,10 +27,8 @@ export class AppComponent {
 
   signOut() : void {
     this
-      .router
-      .navigate(['/']);
-    this
       .auth
       .signOut();
+
   }
 }

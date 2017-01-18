@@ -1,51 +1,74 @@
 import {Injectable} from '@angular/core';
 import {AuthProviders, AuthMethods, FirebaseAuth, FirebaseAuthState} from 'angularfire2';
+import AuthActions from '../auth.actions';
+import {Observable} from 'rxjs/Rx';
+import {Store} from '@ngrx/store';
+import {Auth} from '../auth';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthService {
-  private authState : FirebaseAuthState = null;
+    AuthState$ : Observable < Auth >;
 
-  constructor(public auth$ : FirebaseAuth) {
-    auth$.subscribe((state : FirebaseAuthState) => {
-      this.authState = state;
-    });
-  }
+    constructor(private router : Router, public auth$ : FirebaseAuth, private store : Store < any >, private actions : AuthActions) {
+        console.log('AUTHSERVICE CREATED');
+        this
+            .auth$
+            .subscribe((firebaseState : FirebaseAuthState) => {
+                if (firebaseState !== null) {
+                    this
+                        .store
+                        .dispatch(this.actions.initAuth({authenticated: true, id: firebaseState.auth.uid, displayName: firebaseState.auth.displayName}))
+                } else {
+                    this
+                        .store
+                        .dispatch(this.actions.initAuth({authenticated: false, id: '', displayName: ''}))
+                }
+            });
+        this.AuthState$ = store.select(state => state)as Observable < Auth >;
+    }
 
-  get authenticated() : boolean {
-    return this.authState !== null;
-  }
+    authenticate(provider : number) : firebase.Promise < FirebaseAuthState > {
+        return this
+            .auth$
+            .login({provider})
+            .then((firebaseAuthState) => this.store.dispatch(this.actions.signInSuccess({authenticated: true, id: firebaseAuthState.auth.uid, displayName: firebaseAuthState.auth.displayName})))
+            .catch(error => console.log('ERROR @ AuthService#signIn() :', error));
+    }
 
-  get id() : string {
-    return this.authenticated
-      ? this.authState.uid
-      : '';
-  }
+    signInWithTestAccount() : firebase.Promise < FirebaseAuthState > {
+        return this
+            .auth$
+            .login({
+                email: 'default@default.de',
+                password: 'default'
+            }, {
+                provider: AuthProviders.Password,
+                method: AuthMethods.Password
+            })
+            .then((firebaseAuthState) => this.store.dispatch(this.actions.signInSuccess({authenticated: true, id: firebaseAuthState.auth.uid, displayName: firebaseAuthState.auth.displayName})))
+            .catch(error => console.log('ERROR @ AuthService#signInAnonymously() :', error));
+    }
 
-  signIn(provider : number) : firebase.Promise < FirebaseAuthState > {
-    return this
-      .auth$
-      .login({provider})
-      .catch(error => console.log('ERROR @ AuthService#signIn() :', error));
-  }
+    signInWithGithub() : firebase.Promise < FirebaseAuthState > {
+        return this.authenticate(AuthProviders.Github);
+    }
 
-  signInAnonymously() : firebase.Promise < FirebaseAuthState > {
-    return this
-      .auth$
-      .login({provider: AuthProviders.Anonymous, method: AuthMethods.Anonymous})
-      .catch(error => console.log('ERROR @ AuthService#signInAnonymously() :', error));
-  }
+    signInWithGoogle() : firebase.Promise < FirebaseAuthState > {
+        return this.authenticate(AuthProviders.Google);
+    }
 
-  signInWithGithub() : firebase.Promise < FirebaseAuthState > {
-    return this.signIn(AuthProviders.Github);
-  }
+    signOut() : void {
+        this
+            .auth$
+            .logout();
+        this
+            .router
+            .navigate(['sign-in']);
+        return this
+            .store
+            .dispatch(this.actions.signOutSuccess({authenticated: false, id: '', displayName: ''}));
 
-  signInWithGoogle() : firebase.Promise < FirebaseAuthState > {
-    return this.signIn(AuthProviders.Google);
-  }
+    }
 
-  signOut() : void {
-    this
-      .auth$
-      .logout();
-  }
 }

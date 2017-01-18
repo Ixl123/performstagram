@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {NewAuthService} from '../services/newauth.service';
+import {AuthService} from '../services/auth.service';
 import {Store} from '@ngrx/store';
 import AuthActions from '../auth.actions';
 import {Observable} from 'rxjs/Rx';
 import {Auth} from '../auth';
-@Component({template: `
+@Component({selector: 'sign-in', template: `
   <div class="sign-in_flex-container">
                 <div class="sign-in_flex-item-account">
                     <button
@@ -34,33 +34,34 @@ import {Auth} from '../auth';
   `})
 
 export class SignInComponent {
-  myAuth : Observable < Auth >;
 
-  constructor(private router : Router, public store : Store < Auth >, private testAuth : NewAuthService) {}
+  constructor(private router : Router, public store : Store < Auth >, private auth : AuthService) {
+    console.log('SIGN IN COMPONENT CREAED')
+  }
   signInWithTestAccount() : void {
 
     this
-      .testAuth
+      .auth
       .signInWithTestAccount()
       .then(() => this.postSignIn());
   }
 
   signInWithGithub() : void {
     this
-      .testAuth
+      .auth
       .signInWithGithub()
       .then(() => this.postSignIn());
   }
 
   signInWithGoogle() : void {
     this
-      .testAuth
+      .auth
       .signInWithGoogle()
       .then(() => this.postSignIn());
   }
   private postSignIn() : void {
     this
       .router
-      .navigate(['/tasks']);
+      .navigate(['/photo-grid']);
   }
 }
