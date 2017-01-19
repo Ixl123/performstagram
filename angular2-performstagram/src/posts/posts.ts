@@ -1,7 +1,7 @@
 import Post from './Post';
 export default class Posts {
-  posts : Array < any > = [];
-  constructor(posts : Array < any >) {
+  posts : Array < Post > = [];
+  constructor(posts : Array < Post >) {
     this.posts = posts;
   }
 }

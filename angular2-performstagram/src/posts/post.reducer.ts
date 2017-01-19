@@ -3,10 +3,7 @@ import Posts from './posts';
 import {PostActions} from './post.actions';
 
 export const postReducer : ActionReducer < Posts > = (state, {payload, type} : Action) => {
-    debugger;
-    console.log(type);
 
-    debugger;
     switch (type) {
         case PostActions.LOAD_POSTS_SUCCESS:
             debugger;

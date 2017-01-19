@@ -14,18 +14,18 @@ import Comment from './comment';
 
 @Injectable()
 export class CommentEffects {
-    constructor(private actions$ : Actions, private firebase : AngularFire, private store$ : Store < any >, public commentActions : CommentActions) {
-
-        console.log('CREATE COMMENT EFFECTS');
-    }
+    constructor(private actions$ : Actions, private firebase : AngularFire, private store$ : Store < any >, public commentActions : CommentActions) {}
 
     @Effect()
     loadComments$ = this
         .actions$
         .ofType(CommentActions.LOAD_COMMENTS)
         .switchMap(() => this.firebase.database.list('comments'))
-        .map((fetchedComments) => this.commentActions.loadCommentsSuccess(new Comments(fetchedComments.map((comment) => {
-            return new Comment(comment.author, comment.comment)
+        .map((fetchedComments) => this.commentActions.loadCommentsSuccess(new Comments(fetchedComments.map((commentsForSpecificPost) => {
+            // same structure as react perfomstagram store
+            commentsForSpecificPost.code = commentsForSpecificPost.$key;
+            delete commentsForSpecificPost.$key;
+            return commentsForSpecificPost;
         }))))
         .catch(error => Observable.of(this.commentActions.loadCommentsError(error)));
 }

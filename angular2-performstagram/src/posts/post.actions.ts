@@ -47,8 +47,7 @@ export class PostActions {
     }
 
     loadPostsSuccess(posts : Posts) : Action {
-        console.log(posts);
-        debugger;
+
         return {type: PostActions.LOAD_POSTS_SUCCESS, payload: posts.posts};
     }
 

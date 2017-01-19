@@ -1,17 +1,28 @@
+// Angular Core
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule, Routes} from '@angular/router';
-import {AuthModule} from '../auth/auth.module'
+
+// Firebase
 import {FirebaseModule} from '../firebase';
+
+// Modules and Components
 import {PostsModule} from '../posts/post.module'
-import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {AuthModule} from '../auth/auth.module'
 import {AppComponent} from './components/app.component';
 import {AppHeaderComponent} from './components/app-header.component';
+
+// NGRX
+import {RouterState} from '@ngrx/router-store';
+import {StoreModule} from '@ngrx/store';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+
+// Reducer
+import {routerReducer, RouterStoreModule} from '@ngrx/router-store';
 import {authReducer} from '../auth/auth.reducer';
 import {postReducer} from '../posts/post.reducer';
-import {StoreModule} from '@ngrx/store';
-import {routerReducer, RouterStoreModule} from '@ngrx/router-store';
-import {RouterState} from '@ngrx/router-store';
+import {commentReducer} from '../posts/comment.reducer';
+
 const appRoutes : Routes = [
   {
     path: '',
@@ -33,7 +44,8 @@ const appRoutes : Routes = [
     BrowserModule, RouterModule.forRoot(appRoutes, {useHash: false}),
     StoreModule.provideStore({
       auth: authReducer,
-      posts: postReducer
+      posts: postReducer,
+      comments: commentReducer
     }, {
       router: {
         path: window.location.pathname + window.location.search

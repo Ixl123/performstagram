@@ -19,7 +19,6 @@ import {Observable} from 'rxjs/Rx';
 export class AppComponent {
   authenticated : Observable < boolean >;
   constructor(private auth : AuthService, private router : Router, public store : Store < any >) {
-    console.log('APP COMPONENT CREATED');
     this.authenticated = store.select((state) => {
       return state.auth.authenticated
     })

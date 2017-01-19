@@ -35,9 +35,7 @@ import {Auth} from '../auth';
 
 export class SignInComponent {
 
-  constructor(private router : Router, public store : Store < Auth >, private auth : AuthService) {
-    console.log('SIGN IN COMPONENT CREAED')
-  }
+  constructor(private router : Router, public store : Store < Auth >, private auth : AuthService) {}
   signInWithTestAccount() : void {
 
     this

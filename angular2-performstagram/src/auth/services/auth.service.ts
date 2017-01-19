@@ -11,7 +11,7 @@ export class AuthService {
     AuthState$ : Observable < Auth >;
 
     constructor(private router : Router, public auth$ : FirebaseAuth, private store : Store < any >, private actions : AuthActions) {
-        console.log('AUTHSERVICE CREATED');
+
         this
             .auth$
             .subscribe((firebaseState : FirebaseAuthState) => {
@@ -47,7 +47,7 @@ export class AuthService {
                 method: AuthMethods.Password
             })
             .then((firebaseAuthState) => this.store.dispatch(this.actions.signInSuccess({authenticated: true, id: firebaseAuthState.auth.uid, displayName: firebaseAuthState.auth.displayName})))
-            .catch(error => console.log('ERROR @ AuthService#signInAnonymously() :', error));
+            .catch(error => console.log('ERROR @ AuthService#signInWithTestAccount() :', error));
     }
 
     signInWithGithub() : firebase.Promise < FirebaseAuthState > {

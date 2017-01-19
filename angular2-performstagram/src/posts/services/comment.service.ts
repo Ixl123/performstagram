@@ -31,4 +31,11 @@ export class CommentService {
             .store
             .dispatch(this.actions.deleteComment(comment));
     }
+    getComments(postId : string) {
+        return this
+            .comments$
+            .map((comment) => {
+                return null;
+            })
+    }
 }

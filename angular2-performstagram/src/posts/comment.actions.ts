@@ -49,9 +49,7 @@ export class CommentActions {
     }
 
     loadCommentsSuccess(comments : Comments) : Action {
-        console.log(comments);
-        debugger;
-        return {type: CommentActions.LOAD_COMMENTS_SUCCESS, payload: comments};
+        return {type: CommentActions.LOAD_COMMENTS_SUCCESS, payload: comments.comments};
     }
 
     // ===================================  UPDATE

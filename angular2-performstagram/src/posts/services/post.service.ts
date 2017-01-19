@@ -8,11 +8,11 @@ import {AuthService} from '../../auth/auth.module';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 @Injectable()
 export class PostService {
-    posts$ : Observable < Posts[] >;
+    posts$ : Observable < Array < Post > >;
 
     constructor(private store : Store < any >, public auth : AuthService, af : AngularFire, public actions : PostActions) {
         store.dispatch(this.actions.loadPosts());
-        this.posts$ = store.select('posts')as Observable < Posts[] >;
+        this.posts$ = store.select('posts')as Observable < Array < Post > >;
     }
 
     createPost(post : Post) : void {
@@ -22,8 +22,19 @@ export class PostService {
     }
 
     updatePost(post : Post) : void {
+        debugger;
+
         this
             .store
             .dispatch(this.actions.updatePost(post));
+    }
+    getPost(postId : string) : Observable < Array < Post > > {
+        return this
+            .posts$
+            .map((posts) => {
+                return posts.filter((post) => {
+                    return post.code === postId
+                })
+            })
     }
 }

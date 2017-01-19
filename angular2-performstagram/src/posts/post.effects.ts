@@ -14,10 +14,7 @@ import Post from './post';
 
 @Injectable()
 export class PostEffects {
-    constructor(private actions$ : Actions, private firebase : AngularFire, private store$ : Store < any >, public postActions : PostActions) {
-
-        console.log('EFFECTS CREATE');
-    }
+    constructor(private actions$ : Actions, private firebase : AngularFire, private store$ : Store < any >, public postActions : PostActions) {}
 
     @Effect()
     loadPosts$ = this
@@ -27,6 +24,12 @@ export class PostEffects {
         .map((fetchedPosts) => this.postActions.loadPostsSuccess(new Posts(fetchedPosts.map((post) => {
             return new Post(post.caption, post.id, post.title, post.display_src, post.likes, post.$key)
         }).reverse())))
+        .catch(error => Observable.of(this.postActions.loadPostsError(error)));
+    @Effect()
+    updatePost$ = this
+        .actions$
+        .ofType(PostActions.UPDATE_POST)
+        .switchMap(({payload}) => this.firebase.database.list('posts').update(payload.key, new Post(payload.caption, payload.id, payload.title, payload.displa_src, payload.likes + 1, payload.code)))
         .catch(error => Observable.of(this.postActions.loadPostsError(error)));
 
 }

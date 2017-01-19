@@ -13,7 +13,7 @@ import {PhotoGridComponent} from './components/photo-grid.component';
 import {CommentsComponent} from './components/comments.component';
 import {PhotoComponent} from './components/photo.component';
 import {SingleComponent} from './components/single.component';
-
+import {CommentComponent} from './components/comment.component';
 // Services
 
 import {PostService} from './services/post.service';
@@ -32,6 +32,10 @@ const routes : Routes = [
     {
         path: 'photo-grid',
         component: PhotoGridComponent,
+        canActivate: [AuthGuard]
+    }, {
+        path: 'single/:postId',
+        component: SingleComponent,
         canActivate: [AuthGuard]
     }
 ];
