@@ -1,33 +1,43 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Params, Router, ActivatedRoute} from '@angular/router';
-import {PostService} from '../services/post.service'
-import {CommentService} from '../services/comment.service'
-import Post from '../post'
+import {PostService} from '../services/post.service';
+import {CommentService} from '../services/comment.service';
+import {AuthService} from '../../auth/services/auth.service';
+import {Store} from '@ngrx/store';
+import Post from '../post';
+import Comments from '../comments';
+
 import 'rxjs/add/operator/switchMap';
 
 @Component({selector: 'single', template: `
-
 <div class='single-photo'>
-                <photo [posts]="post" [comments]="commentService.comments$"></photo>
-                <comments [postComments]="postComments"> </comments>
+                <photo *ngIf="(postService.posts$ | async) && (commentService.comments$ | async)" photo [posts]="post" [comments]="commentService.comments$" ></photo>
+                <comments  [commentsForSelectedPost]="commentsForSelectedPost" > </comments>
             </div>`})
-export class SingleComponent implements OnInit {
-
+export class SingleComponent {
     post : Observable < Array < Post > >;
-    postComments : Observable < Array < Comment > >;
+    commentsForSelectedPost : Observable < any >;
+    postId : string;
+    sub : any;
 
-    constructor(private route : ActivatedRoute, private router : Router, private postService : PostService, private commentService : CommentService) {
-        this.post = this
+    constructor(private route : ActivatedRoute, private router : Router, private postService : PostService, private commentService : CommentService, private store : Store < any >, private authService : AuthService) {
+
+        this.sub = this
             .route
             .params
-            .switchMap((params : Params) => this.postService.getPost(params['postId']))
-        this.postComments = this
-            .route
-            .params
-            .switchMap((params : Params) => this.commentService.getComments(params['postId']))
+            .subscribe(params => {
+                this.postId = params['postId'];
+                console.log(this.postId);
+                this.post = this
+                    .postService
+                    .getPost(this.postId);
+                this.commentsForSelectedPost = this
+                    .commentService
+                    .getComments(this.postId);
+
+            });
+
     }
-
-    ngOnInit() {}
 
 }

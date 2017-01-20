@@ -42,7 +42,12 @@ const routes : Routes = [
 
 @NgModule({
     declarations: [
-        PhotoGridComponent, CommentsComponent, PhotoComponent, SingleComponent, AddPhotoComponent
+        PhotoGridComponent,
+        CommentsComponent,
+        PhotoComponent,
+        SingleComponent,
+        AddPhotoComponent,
+        CommentComponent
     ],
     imports: [
         CommonModule, FormsModule, RouterModule.forChild(routes),

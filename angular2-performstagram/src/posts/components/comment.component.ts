@@ -1,9 +1,12 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Output, Input} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
+import {Auth} from '../../auth/auth';
+import {CommentService} from '../services/comment.service';
 
-@Component({selector: 'comment', templateUrl: require('./comment.component.html')})
+@Component({changeDetection: ChangeDetectionStrategy.OnPush, selector: 'comment', template: require('./comment.component.html')})
+
 export class CommentComponent {
-    @Input()comment : Observable < Comment >;
-    constructor() {}
-
+    @Input()author : string;
+    @Input()text : string;
+    constructor(commentService : CommentService) {}
 }

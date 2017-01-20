@@ -6,6 +6,7 @@ import Post from '../post';
 import {PostActions} from '../post.actions';
 import {AuthService} from '../../auth/auth.module';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
+
 @Injectable()
 export class PostService {
     posts$ : Observable < Array < Post > >;
@@ -29,6 +30,7 @@ export class PostService {
             .dispatch(this.actions.updatePost(post));
     }
     getPost(postId : string) : Observable < Array < Post > > {
+
         return this
             .posts$
             .map((posts) => {

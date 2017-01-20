@@ -8,11 +8,11 @@ import {AuthService} from '../../auth/auth.module';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 @Injectable()
 export class CommentService {
-    comments$ : Observable < Comments[] >;
+    comments$ : Observable < any >;
 
     constructor(private store : Store < any >, public auth : AuthService, af : AngularFire, public actions : CommentActions) {
         store.dispatch(this.actions.loadComments());
-        this.comments$ = store.select('comments')as Observable < Comments[] >;
+        this.comments$ = store.select('comments');
     }
 
     createCommment(comment : Comment) : void {
@@ -31,11 +31,33 @@ export class CommentService {
             .store
             .dispatch(this.actions.deleteComment(comment));
     }
+
     getComments(postId : string) {
-        return this
+        // find the object in the Observable Array which holds the comments for the
+        // specific postId
+        const commentsForSelectedPost$ = this
             .comments$
             .map((comment) => {
-                return null;
+                return comment.filter((commentsForSelectedPost) => {
+                    return commentsForSelectedPost.code === postId;
+                })
+            });
+        // extract the comments from the Observable. structure of the comments
+        // {key1:{author:"test", comment:"test"}, key2:{author:"test2",
+        // comment:"test2"},... code:"mkasdmkam"} -> the code references to the postId.
+        const commentsCleared$ = commentsForSelectedPost$.map((commentsArrayCleared) => {
+            return commentsArrayCleared.map(commentsArray => {
+                return Object
+                    .keys(commentsArray)
+                    .map((key) => {
+                        if (key.startsWith('-')) {
+                            return commentsArray[key];
+                        }
+                    })
             })
+
+        });
+        return commentsCleared$;
+
     }
 }

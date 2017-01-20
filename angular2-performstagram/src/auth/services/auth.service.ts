@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthService {
-    AuthState$ : Observable < Auth >;
+    authState$ : Observable < Auth >;
 
     constructor(private router : Router, public auth$ : FirebaseAuth, private store : Store < any >, private actions : AuthActions) {
 
@@ -25,9 +25,13 @@ export class AuthService {
                         .dispatch(this.actions.initAuth({authenticated: false, id: '', displayName: ''}))
                 }
             });
-        this.AuthState$ = store.select(state => state)as Observable < Auth >;
+        this.authState$ = store.select('auth')as Observable < Auth >;
     }
-
+    getUserName() : Observable < String > {
+        return this
+            .authState$
+            .map(auth => auth.displayName);
+    }
     authenticate(provider : number) : firebase.Promise < FirebaseAuthState > {
         return this
             .auth$

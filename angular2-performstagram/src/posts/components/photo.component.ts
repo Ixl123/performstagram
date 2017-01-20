@@ -1,9 +1,8 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Output, Input} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Router} from '@angular/router'
-import {PostService} from '../services/post.service'
 import Posts from '../posts';
-import Comments from '../comments'
+import Comments from '../comments';
 @Component({changeDetection: ChangeDetectionStrategy.OnPush, selector: 'photo', template: require('./photo.component.html')})
 
 export class PhotoComponent {
@@ -12,7 +11,7 @@ export class PhotoComponent {
 
     @Output()updatePost : EventEmitter < any > = new EventEmitter(false);
 
-    constructor(public router : Router, private postService : PostService) {
+    constructor(public router : Router) {
         console.log(this.posts);
         console.log(this.comments);
     }

@@ -10,12 +10,11 @@ import {CommentService} from '../services/comment.service'
          <div class="aligner">
             <add-photo class="align-center"></add-photo>
          </div>
-         <photo [posts]="postService.posts$" [comments]="commentService.comments$"></photo>
+         <photo *ngIf="(postService.posts$ | async) && (commentService.comments$ | async)" [posts]="postService.posts$" [comments]="commentService.comments$" class="photo-grid"></photo>
          
     </div>
   `})
 
 export class PhotoGridComponent {
-
     constructor(public route : ActivatedRoute, public postService : PostService, public commentService : CommentService) {}
 }
