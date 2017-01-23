@@ -28,7 +28,6 @@ export class SingleComponent {
             .params
             .subscribe(params => {
                 this.postId = params['postId'];
-                console.log(this.postId);
                 this.post = this
                     .postService
                     .getPost(this.postId);

@@ -64,7 +64,7 @@ export class PostActions {
         return {type: PostActions.UPDATE_POST_ERROR, payload: error};
     }
 
-    updatePostSuccess(post : Post) : Action {
+    updatePostSuccess(post : any) : Action {
         return {type: PostActions.UPDATE_POST_SUCCESS, payload: {
                 post
             }};

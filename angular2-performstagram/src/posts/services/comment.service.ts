@@ -47,13 +47,13 @@ export class CommentService {
         // comment:"test2"},... code:"mkasdmkam"} -> the code references to the postId.
         const commentsCleared$ = commentsForSelectedPost$.map((commentsArrayCleared) => {
             return commentsArrayCleared.map(commentsArray => {
-                return Object
-                    .keys(commentsArray)
-                    .map((key) => {
-                        if (key.startsWith('-')) {
-                            return commentsArray[key];
-                        }
-                    })
+                return Object.values(commentsArray)
+                // so here we exclude all values which arent objects since we store the code
+                // reference to the post in the same object as the commentObject we have to
+                // filter the value out
+                    .filter((comment) => {
+                    return comment !== null && typeof comment === 'object'
+                })
             })
 
         });

@@ -25,11 +25,17 @@ export class PostEffects {
             return new Post(post.caption, post.id, post.title, post.display_src, post.likes, post.$key)
         }).reverse())))
         .catch(error => Observable.of(this.postActions.loadPostsError(error)));
+
     @Effect()
     updatePost$ = this
         .actions$
         .ofType(PostActions.UPDATE_POST)
-        .switchMap(({payload}) => this.firebase.database.list('posts').update(payload.key, new Post(payload.caption, payload.id, payload.title, payload.displa_src, payload.likes + 1, payload.code)))
-        .catch(error => Observable.of(this.postActions.loadPostsError(error)));
+        .switchMap(({payload}) => this.firebase.database.list('posts').update(payload.post.code, payload.post).then(() => {
+            return this
+                .postActions
+                .updatePostSuccess(payload.post);
+
+        }))
+        .catch(error => Observable.of(this.postActions.updatePostError(error)));
 
 }

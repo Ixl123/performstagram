@@ -1,11 +1,11 @@
 export default class Post {
-    caption : String;
-    id : String;
-    title : String;
-    display_src : String;
-    likes : Number;
-    code : String;
-    constructor(caption : String, id : String, title : String, display_src : String, likes : Number, code : String) {
+    caption : string;
+    id : string;
+    title : string;
+    display_src : string;
+    likes : number;
+    code : string;
+    constructor(caption : string, id : string, title : string, display_src : string, likes : number, code : string) {
         this.caption = caption;
         this.id = id;
         this.title = title,
