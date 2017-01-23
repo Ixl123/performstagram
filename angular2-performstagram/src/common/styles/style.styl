@@ -22,7 +22,7 @@ body
   padding 2rem
   border 1px solid lightgray
   background white
-  box-shadow 0 0 0 5px rgba(0,0,0,0.03);
+  box-shadow 0 0 0 5px rgba(0,0,0,0.03)
   position relative
 
 @media (max-width: 900px) 
@@ -132,9 +132,6 @@ button, .button
     border-color blue
     outline 0
 
-/*
-  Cowboy style speech bubble - you should probably use an SVG for this if you are doing more icons.
-*/
 .speech-bubble
   size = 1.25rem
   width size * 1.2
@@ -156,7 +153,31 @@ button, .button
     left 0
 
 .box
-  width:300px
-  margin: 0 auto 0 auto
-  padding:0px 0px 70px 0px
+  width 300px
+  margin 0 auto 0 auto
+  padding 0px 0px 70px 0px
 
+
+.overlay 
+  position fixed
+  top 0
+  left 0
+  right 0
+  bottom 0
+  background-color: rgba(255, 255, 255, 0.75)
+
+.content 
+  position absolute
+  top 40px
+  left 40px
+  right 40px
+  bottom 40px
+  border 1px solid #ccc
+  background #fff
+  overflow auto
+  -webkit-overflow-scrolling: touch
+  border-radius: 4px
+  outline none
+  padding 20px
+
+ 

@@ -9,7 +9,10 @@ export class CommentsComponent {
   @Input()commentsForSelectedPost : Observable < any >;
   constructor(private authService : AuthService) {}
 
-  handleSubmit(event) {
-    console.log(event);
+  onSubmit(author : string, comment : string) {
+    debugger;
+
+    console.log(author);
+    console.log(comment);
   }
 }

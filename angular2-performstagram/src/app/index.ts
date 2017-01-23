@@ -11,6 +11,8 @@ import {PostsModule} from '../posts/post.module'
 import {AuthModule} from '../auth/auth.module'
 import {AppComponent} from './components/app.component';
 import {AppHeaderComponent} from './components/app-header.component';
+import {ModalModule} from 'angular2-modal';
+import {BootstrapModalModule} from 'angular2-modal/plugins/bootstrap';
 
 // NGRX
 import {RouterState} from '@ngrx/router-store';
@@ -55,6 +57,8 @@ const appRoutes : Routes = [
     AuthModule,
     PostsModule,
     FirebaseModule,
+    ModalModule.forRoot(),
+    BootstrapModalModule,
     StoreDevtoolsModule.instrumentOnlyWithExtension()
   ]
 })

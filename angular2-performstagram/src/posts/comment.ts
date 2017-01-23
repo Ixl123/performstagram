@@ -4,6 +4,5 @@ export default class Comment {
     constructor(author : String, comment : String) {
         this.author = author;
         this.comment = comment;
-
     }
 }

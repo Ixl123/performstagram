@@ -1,12 +1,14 @@
-<div class="comments">
+<div *ngIf="commentsForSelectedPost" class="comments">
     <div *ngFor="let commentObservableArray of commentsForSelectedPost | async">
-        <div *ngFor="let comment of commentObservableArray">
-            <comment *ngIf="comment?.author && comment?.comment" [author]="comment?.author" [text]="comment?.comment"></comment>
+        <div *ngIf="commentObservableArray">
+            <div *ngFor="let comment of commentObservableArray">
+                <comment *ngIf="comment?.author && comment?.comment" [author]="comment?.author" [text]="comment?.comment"></comment>
+            </div>
         </div>
     </div>
-    <form class="comment-form" (onSubmit)="handleSubmit(event)">
-        <input type="text" [value]="authService.getUserName() | async" readOnly/>
-        <input type="text" placeholder="comment" />
+    <form class="comment-form" (ngSubmit)="onSubmit(author.value, comment.value)">
+        <input type="text" #author [value]="authService.getUserName() | async" readOnly/>
+        <input type="text" #comment placeholder="comment" />
         <input type="submit " hidden/>
     </form>
 </div>

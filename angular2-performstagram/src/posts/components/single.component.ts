@@ -13,7 +13,7 @@ import 'rxjs/add/operator/switchMap';
 @Component({selector: 'single', template: `
 <div class='single-photo'>
                 <photo *ngIf="(postService.posts$ | async) && (commentService.comments$ | async)" photo [posts]="post" [comments]="commentService.comments$" ></photo>
-                <comments  [commentsForSelectedPost]="commentsForSelectedPost" > </comments>
+                <comments *ngIf="(commentService.comments$ | async)"  [commentsForSelectedPost]="commentsForSelectedPost" > </comments>
             </div>`})
 export class SingleComponent {
     post : Observable < Array < Post > >;
