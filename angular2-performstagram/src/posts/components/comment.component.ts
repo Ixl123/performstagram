@@ -8,5 +8,9 @@ import {CommentService} from '../services/comment.service';
 export class CommentComponent {
     @Input()author : string;
     @Input()text : string;
-    constructor(commentService : CommentService) {}
+    @Input()key : string;
+    @Input()postId : string;
+
+    constructor(private commentService : CommentService) {}
+
 }

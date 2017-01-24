@@ -14,10 +14,11 @@ export class PhotoComponent {
 
     constructor(public router : Router, public postService : PostService) {}
     countComments(comments) : number {
-        // -1 because also they key for the right comment is saved in the object.
+        // -2 because also they key for the right comment is saved in the object as well
+        // as an exist method from firebase.
         return Object
             .keys(comments)
-            .length - 1
+            .length - 2
     }
 
     onSelect(photoId : string) {

@@ -28,4 +28,28 @@ export class CommentEffects {
             return commentsForSpecificPost;
         }))))
         .catch(error => Observable.of(this.commentActions.loadCommentsError(error)));
+
+    @Effect()
+    createComment$ = this
+        .actions$
+        .ofType(CommentActions.CREATE_COMMENT)
+        .switchMap(({payload}) => this.firebase.database.list(`comments/${payload.postId}`).push(payload.comment).then((pushedComment) => {
+            debugger;
+            console.log(pushedComment);
+            debugger;
+            return this
+                .commentActions
+                .createCommentSuccess(payload.comment, payload.postId, pushedComment.key);
+        }))
+        .catch(error => Observable.of(this.commentActions.createCommentError(error)));
+    @Effect()
+    removeComment$ = this
+        .actions$
+        .ofType(CommentActions.REMOVE_COMMENT)
+        .switchMap(({payload}) => this.firebase.database.object(`comments/${payload.postId}/${payload.key}`).remove().then(() => {
+            return this
+                .commentActions
+                .removeCommentSuccess(payload.postId, payload.key);
+        }))
+        .catch(error => Observable.of(this.commentActions.removeCommentError(error)));
 }

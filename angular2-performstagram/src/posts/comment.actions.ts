@@ -16,26 +16,35 @@ export class CommentActions {
     static UPDATE_COMMENT_ERROR = 'UPDATE_COMMENT_ERROR';
     static UPDATE_COMMENT_SUCCESS = 'UPDATE_COMMENT_SUCCESS';
 
-    static DELTE_COMMENT = 'DELTE_COMMENT';
-    static DELETE_COMMENT_ERROR = 'DELETE_COMMENT_ERROR';
-    static DELETE_COMMENT_SUCCESS = 'DELETE_COMMENT_SUCCESS';
+    static REMOVE_COMMENT = 'REMOVE_COMMENT';
+    static REMOVE_COMMENT_ERROR = 'REMOVE_COMMENT_ERROR';
+    static REMOVE_COMMENT_SUCCESS = 'REMOVE_COMMENT_SUCCESS';
     // ===================================  CREATE
     // -----------------------------------
 
-    createComment(comment : Comment) : Action {
-        return {type: CommentActions.CREATE_COMMENT, payload: {
-                comment
-            }};
+    createComment(comment : Comment, postId) : Action {
+        return {
+            type: CommentActions.CREATE_COMMENT,
+            payload: {
+                comment,
+                postId
+            }
+        };
     }
 
-    createCommentFailed(error : any) : Action {
+    createCommentError(error : any) : Action {
         return {type: CommentActions.CREATE_COMMENT_ERROR, payload: error};
     }
 
-    createCommentSuccess(comment : Comment) : Action {
-        return {type: CommentActions.CREATE_COMMENT_SUCCESS, payload: {
-                comment
-            }};
+    createCommentSuccess(comment : Comment, postId : string, key : string) : Action {
+        return {
+            type: CommentActions.CREATE_COMMENT_SUCCESS,
+            payload: {
+                comment,
+                postId,
+                key
+            }
+        };
     }
 
     // ===================================  LOAD -----------------------------------
@@ -72,19 +81,27 @@ export class CommentActions {
     }
     // ===================================  Delete
     // -----------------------------------
-    deleteComment(comment : Comment) : Action {
-        return {type: CommentActions.UPDATE_COMMENT, payload: {
-                comment
-            }};
+    removeComment(postId : string, key : string) : Action {
+        return {
+            type: CommentActions.REMOVE_COMMENT,
+            payload: {
+                key,
+                postId
+            }
+        };
     }
 
-    deleteCommentError(error : any) : Action {
-        return {type: CommentActions.UPDATE_COMMENT_ERROR, payload: error};
+    removeCommentError(error : any) : Action {
+        return {type: CommentActions.REMOVE_COMMENT_ERROR, payload: error};
     }
 
-    deleteCommentSuccess(comment : Comment) : Action {
-        return {type: CommentActions.UPDATE_COMMENT_SUCCESS, payload: {
-                comment
-            }};
+    removeCommentSuccess(postId : string, key : string) : Action {
+        return {
+            type: CommentActions.REMOVE_COMMENT_SUCCESS,
+            payload: {
+                postId,
+                key
+            }
+        };
     }
 }

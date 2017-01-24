@@ -13,8 +13,9 @@ import 'rxjs/add/operator/switchMap';
 @Component({selector: 'single', template: `
 <div class='single-photo'>
                 <photo *ngIf="(postService.posts$ | async) && (commentService.comments$ | async)" photo [posts]="post" [comments]="commentService.comments$" ></photo>
-                <comments *ngIf="(commentService.comments$ | async)"  [commentsForSelectedPost]="commentsForSelectedPost" > </comments>
-            </div>`})
+                <comments *ngIf="(commentService.comments$ | async) && postId"  [commentsForSelectedPost]="commentsForSelectedPost" [postId]="postId"> </comments>
+            </div>
+            `})
 export class SingleComponent {
     post : Observable < Array < Post > >;
     commentsForSelectedPost : Observable < any >;

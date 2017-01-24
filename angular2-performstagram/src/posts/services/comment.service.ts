@@ -15,10 +15,11 @@ export class CommentService {
         this.comments$ = store.select('comments');
     }
 
-    createCommment(comment : Comment) : void {
+    createCommment(comment : Comment, postId : string) : void {
+
         this
             .store
-            .dispatch(this.actions.createComment(comment));
+            .dispatch(this.actions.createComment(comment, postId));
     }
 
     updateComment(comment : Comment) : void {
@@ -26,10 +27,10 @@ export class CommentService {
             .store
             .dispatch(this.actions.updateComment(comment));
     }
-    deletComment(comment : Comment) : void {
+    removeComment(postId : string, key : string) : void {
         this
             .store
-            .dispatch(this.actions.deleteComment(comment));
+            .dispatch(this.actions.removeComment(postId, key));
     }
 
     getComments(postId : string) {
@@ -46,13 +47,21 @@ export class CommentService {
         // {key1:{author:"test", comment:"test"}, key2:{author:"test2",
         // comment:"test2"},... code:"mkasdmkam"} -> the code references to the postId.
         const commentsCleared$ = commentsForSelectedPost$.map((commentsArrayCleared) => {
-            return commentsArrayCleared.map(commentsArray => {
-                return Object.values(commentsArray)
+            return commentsArrayCleared.map(commentsObjects => {
+
+                return Object.values(commentsObjects)
                 // so here we exclude all values which arent objects since we store the code
                 // reference to the post in the same object as the commentObject we have to
                 // filter the value out
-                    .filter((comment) => {
-                    return comment !== null && typeof comment === 'object'
+                    .filter((comment, i) => {
+
+                    if (comment !== null && typeof comment === 'object') {
+                        comment['key'] = Object.keys(commentsObjects)[i];
+                        debugger;
+                        console.log(comment);
+                        return comment;
+                    }
+
                 })
             })
 

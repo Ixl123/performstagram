@@ -1,6 +1,6 @@
 <div class='comment'>
     <p>
         <strong>{{author}}</strong> {{text}}
-        <button class="remove-comment" (onClick)="commentService.removeComment">&times;</button>
+        <button class="remove-comment" (click)="commentService.removeComment(postId, key)">&times;</button>
     </p>
 </div>
