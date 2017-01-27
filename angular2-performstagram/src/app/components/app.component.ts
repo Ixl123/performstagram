@@ -18,10 +18,9 @@ import {Observable} from 'rxjs/Rx';
 
 export class AppComponent {
   authenticated : Observable < boolean >;
-  constructor(private auth : AuthService, private router : Router, private store : Store < any >) {
-    this.authenticated = store.select((state) => {
-      return state.auth.authenticated
-    })
+  constructor(private auth : AuthService, private router : Router) {
+    this.authenticated = auth.getAuthStatus();
+
   }
 
   signOut() : void {

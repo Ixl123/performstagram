@@ -1,23 +1,15 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    EventEmitter,
-    Output,
-    ViewContainerRef,
-    ViewChild
-} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ViewChild} from '@angular/core';
 import {FileUploader} from 'ng2-file-upload';
 import {PostService} from '../services/post.service';
 import {ModalService} from '../services/modal.service';
 import {AuthService} from '../../auth/services/auth.service';
-import Post from '../post';
 import {Observable} from 'rxjs/Observable';
 import {UUID} from 'angular2-uuid';
 
 @Component({changeDetection: ChangeDetectionStrategy.OnPush, selector: 'add-photo', template: `
      <div class="photo-grid__button_add">
-                <button (click)="myModal.open()" class="like">+ Add image</button>
-                  <modal #myModal [hideCloseButton]="true" [closeOnOutsideClick]="true">
+                <button (click)="addPhotoModal.open()" class="like">+ Add image</button>
+                  <modal #addPhotoModal [hideCloseButton]="true" [closeOnOutsideClick]="true">
         <modal-content>
         <h2>Upload a image</h2>
         <label for="uploader-input" ng2FileDrop (fileOver)="fileOverBase($event)" [uploader]="uploader">
@@ -43,7 +35,7 @@ import {UUID} from 'angular2-uuid';
   `})
 
 export class AddPhotoComponent {
-    @ViewChild('myModal')modal;
+    @ViewChild('addPhotoModal')modal;
 
     public hasBaseDropZoneOver : boolean = false;
     public uploader : FileUploader = new FileUploader({
@@ -54,17 +46,14 @@ export class AddPhotoComponent {
         queueLimit: 1
     });
     constructor(public postService : PostService, private modalService : ModalService, private authService : AuthService) {}
-    onChange(event : any) : void {
-        console.log('ON_CHANGE');
-    }
+    onChange(event : any) : void {}
     fileOverBase(e : any) : void {
-        debugger;
-        console.log(e);
         this.hasBaseDropZoneOver = e;
     }
     handleCreatePost(postCaption : string) {
-        let file : File = this.uploader.queue[0]._file;
-        if (file !== undefined) {
+
+        if (this.uploader.queue.length > 0) {
+            let file : File = this.uploader.queue[0]._file;
             this
                 .modal
                 .close();
@@ -80,7 +69,6 @@ export class AddPhotoComponent {
                 .subscribe(v => {
                     author = v;
                 });
-            debugger;
 
             const newPost = {
                 author,
@@ -89,7 +77,6 @@ export class AddPhotoComponent {
                 id
             }
 
-            debugger;
             this
                 .postService
                 .createPost(newPost);

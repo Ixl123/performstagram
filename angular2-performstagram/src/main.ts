@@ -2,7 +2,7 @@ import {enableProdMode} from '@angular/core';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 // AppModule
-import {AppModule} from './app';
+import {AppModule} from './app/index.module';
 
 // common styles
 import './common/styles/style.styl';

@@ -2,9 +2,9 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../services/auth.service';
 import {Store} from '@ngrx/store';
-import AuthActions from '../auth.actions';
+import {AuthActions} from '../actions/auth.actions';
 import {Observable} from 'rxjs/Rx';
-import {Auth} from '../auth';
+import {Auth} from '../datatypes/auth';
 @Component({selector: 'sign-in', template: `
   <div class="sign-in_flex-container">
                 <div class="sign-in_flex-item-account">

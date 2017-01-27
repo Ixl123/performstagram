@@ -47,7 +47,7 @@ export const createPost = (newPost) => {
 
             var downloadURL = uploadTask.snapshot.downloadURL;
             postList
-                .push({caption: newPost.caption, title: newPost.title, display_src: downloadURL, likes: 0, id: newPost.id})
+                .push({caption: newPost.caption, display_src: downloadURL, likes: 0, id: newPost.id})
                 .catch((error) => dispatch(createPostError(error)));
         })
 
@@ -75,9 +75,7 @@ export const updatePost = (index, post) => {
         const newPost = {
             caption: post.caption,
             display_src: post.display_src,
-            id: post.id,
-            likes: post.likes,
-            title: post.title
+            likes: post.likes
         }
         postList
             .update(post.code, newPost)
@@ -206,19 +204,6 @@ export const signOutSuccess = () => {
     return {type: actionTypes.SIGN_OUT_SUCCESS};
 }
 
-/**
- * FILE UPLOAD
- */
-
-const uploadFile = (file, fileName) => {
-    // get storage reference
-    const storageRef = storafirebaseApp
-        .storage()
-        .ref('Fotos/' + newPost.title);
-    // upload
-    let uploadTask = storageRef.put(file);
-
-}
 export const uploadFileRequest = () => {
     return {type: actionTypes.UPLOAD_FILE_REQUEST}
 }

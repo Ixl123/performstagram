@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {AuthProviders, AuthMethods, FirebaseAuth, FirebaseAuthState} from 'angularfire2';
-import AuthActions from '../auth.actions';
+import {AuthActions} from '../actions/auth.actions';
 import {Observable} from 'rxjs/Rx';
 import {Store} from '@ngrx/store';
-import {Auth} from '../auth';
+import {Auth} from '../datatypes/auth';
 import {Router} from '@angular/router';
 
 @Injectable()
@@ -31,9 +31,14 @@ export class AuthService {
         return this
             .authState$
             .map(auth => {
-                debugger;
-                console.log(auth);
                 return auth.displayName
+            });
+    }
+    getAuthStatus() : Observable < boolean > {
+        return this
+            .authState$
+            .map(auth => {
+                return auth.authenticated
             });
     }
     authenticate(provider : number) : firebase.Promise < FirebaseAuthState > {
@@ -70,9 +75,7 @@ export class AuthService {
         this
             .auth$
             .logout();
-        this
-            .router
-            .navigate(['sign-in']);
+
         return this
             .store
             .dispatch(this.actions.signOutSuccess({authenticated: false, id: '', displayName: ''}));

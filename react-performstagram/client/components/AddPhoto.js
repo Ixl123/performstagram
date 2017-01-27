@@ -26,14 +26,12 @@ class AddPhoto extends Component {
             .props
             .closeModal();
         const author = this.props.auth.displayName;
-        const title = this.refs.title.value;
         const caption = this.refs.caption.value;
         const id = uuidV4()
 
         const newPost = {
             author,
             caption,
-            title,
             id,
             file
         }
@@ -71,8 +69,7 @@ class AddPhoto extends Component {
                         onSubmit={this
                         .handleSubmit
                         .bind(this)}>
-                        <input type='text' ref='title' placeholder='title'/>
-                        <input type='text' ref='caption' placeholder='caption'/>
+                        <input type='text' className='caption' ref='caption' placeholder='caption'/>
                         <div className="modal-grid__button">
                             <button className="modal-grid__button_submit">
                                 <input type='submit' value="Upload"/></button>

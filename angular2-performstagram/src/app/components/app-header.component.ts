@@ -19,7 +19,7 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@
                         <div class="g-col">
                             <h1>
                             <a routerLink="/" routerLinkActive="active">
-                               Performstagram 3000 </a>
+                               Performstagram 3000 Angular2 </a>
                             </h1>
                         </div>
                     </div>

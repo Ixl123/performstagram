@@ -5,8 +5,8 @@ import {PostService} from '../services/post.service';
 import {CommentService} from '../services/comment.service';
 import {AuthService} from '../../auth/services/auth.service';
 import {Store} from '@ngrx/store';
-import Post from '../post';
-import Comments from '../comments';
+import Post from '../datatypes/post';
+import Comments from '../datatypes/comments';
 
 import 'rxjs/add/operator/switchMap';
 

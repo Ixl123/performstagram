@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
-import Posts from '../Posts';
-import Post from '../post';
-import {PostActions} from '../post.actions';
+import Posts from '../datatypes/posts';
+import Post from '../datatypes/post';
+import {PostActions} from '../actions/post.actions';
 import {AuthService} from '../../auth/auth.module';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 
@@ -17,7 +17,6 @@ export class PostService {
     }
 
     createPost(post : Object) : void {
-        debugger;
         this
             .store
             .dispatch(this.actions.createPost(post));

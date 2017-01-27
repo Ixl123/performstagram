@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
-import Comments from '../Comments';
-import Comment from '../Comment';
-import {CommentActions} from '../comment.actions';
+import Comments from '../datatypes/Comments';
+import Comment from '../datatypes/Comment';
+import {CommentActions} from '../actions/comment.actions';
 import {AuthService} from '../../auth/auth.module';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 @Injectable()
@@ -57,8 +57,6 @@ export class CommentService {
 
                     if (comment !== null && typeof comment === 'object') {
                         comment['key'] = Object.keys(commentsObjects)[i];
-                        debugger;
-                        console.log(comment);
                         return comment;
                     }
 

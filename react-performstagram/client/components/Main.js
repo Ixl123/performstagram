@@ -45,7 +45,7 @@ class Main extends Component {
                     <div className="g-row">
                         <div className="g-col">
                             <h1>
-                                <Link to='/'>Performstagram 3000
+                                <Link to='/'>Performstagram 3000 React
                                 </Link>
                             </h1>
 

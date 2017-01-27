@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
-import Modal from '../Modal';
-import {ModalActions} from '../modal.actions';
+import Modal from '../datatypes/modal';
+import {ModalActions} from '../actions/modal.actions';
 import {AuthService} from '../../auth/auth.module';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 
