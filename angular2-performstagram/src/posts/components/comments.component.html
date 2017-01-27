@@ -6,7 +6,7 @@
                 </comment>
         </div>
     </div>
-    <form class="comment-form" (ngSubmit)="onSubmit(author.value, comment.value)">
+    <form class="comment-form" (ngSubmit)="onSubmit(author.value, comment.value); comment.value= ''">
         <input type="text" #author [value]="authService.getUserName() | async" readOnly/>
         <input type="text" #comment placeholder="comment" />
         <button type="submit" hidden>Submit</button>

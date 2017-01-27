@@ -1,4 +1,11 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Output, Input} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+  Input,
+  ViewChild
+} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {AuthService} from '../../auth/services/auth.service';
 import {CommentService} from '../services/comment.service';
@@ -10,6 +17,7 @@ import Comment from '../comment';
 export class CommentsComponent {
   @Input()commentsForSelectedPost : Observable < any >;
   @Input()postId : string;
+  @ViewChild('comment')comment;
 
   constructor(private authService : AuthService, private commentService : CommentService) {}
 
@@ -17,6 +25,5 @@ export class CommentsComponent {
     this
       .commentService
       .createCommment(new Comment(author, comment), this.postId)
-
   }
 }
