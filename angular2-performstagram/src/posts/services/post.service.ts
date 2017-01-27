@@ -16,7 +16,8 @@ export class PostService {
         this.posts$ = store.select('posts')as Observable < Array < Post > >;
     }
 
-    createPost(post : Post) : void {
+    createPost(post : Object) : void {
+        debugger;
         this
             .store
             .dispatch(this.actions.createPost(post));
@@ -25,7 +26,7 @@ export class PostService {
     updatePost(post : Post, i : number) : void {
         // new Post with incremented likes
 
-        const newPost = new Post(post.caption, post.id, post.title, post.display_src, post.likes += 1, post.code);
+        const newPost = new Post(post.caption, post.display_src, post.likes += 1, post.code);
         this
             .store
             .dispatch(this.actions.updatePost(newPost));

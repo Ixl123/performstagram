@@ -23,7 +23,6 @@ export class SingleComponent {
     sub : any;
 
     constructor(private route : ActivatedRoute, private router : Router, private postService : PostService, private commentService : CommentService, private store : Store < any >, private authService : AuthService) {
-
         this.sub = this
             .route
             .params
@@ -35,9 +34,6 @@ export class SingleComponent {
                 this.commentsForSelectedPost = this
                     .commentService
                     .getComments(this.postId);
-
             });
-
     }
-
 }

@@ -9,7 +9,6 @@ import Comments from '../comments';
 export class PhotoComponent {
     @Input()posts : Observable < Posts >;
     @Input()comments : Observable < Comments >;
-
     @Output()updatePost : EventEmitter < any > = new EventEmitter(false);
 
     constructor(public router : Router, public postService : PostService) {}
@@ -20,11 +19,9 @@ export class PhotoComponent {
             .keys(comments)
             .length - 2
     }
-
     onSelect(photoId : string) {
         this
             .router
             .navigate(['/single', photoId])
     }
-
 }

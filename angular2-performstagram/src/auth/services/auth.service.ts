@@ -27,10 +27,14 @@ export class AuthService {
             });
         this.authState$ = store.select('auth')as Observable < Auth >;
     }
-    getUserName() : Observable < String > {
+    getUserName() : Observable < string > {
         return this
             .authState$
-            .map(auth => auth.displayName);
+            .map(auth => {
+                debugger;
+                console.log(auth);
+                return auth.displayName
+            });
     }
     authenticate(provider : number) : firebase.Promise < FirebaseAuthState > {
         return this

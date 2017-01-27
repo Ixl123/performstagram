@@ -15,12 +15,25 @@ export class PostActions {
 
     static UPDATE_POST = 'UPDATE_POST';
     static UPDATE_POST_ERROR = 'UPDATE_POST_ERROR';
-
     static UPDATE_POST_SUCCESS = 'UPDATE_POST_SUCCESS';
+
+    static UPLOAD_FILE_REQUEST = 'UPLOAD_FILE_REQUEST';
+    static UPLOAD_FILE_ERROR = 'UPLOAD_FILE_ERROR';
+    static UPLOAD_FILE_SUCCESS = 'UPLOAD_FILE_ERROR';
+    // ===================================  UPLOAD FILE
+    // -----------------------------------
+    uploadFileRequest() : Action {
+        return {type: PostActions.UPLOAD_FILE_REQUEST};
+    }
+    uploadFileSuccess() : Action {
+        return {type: PostActions.UPLOAD_FILE_SUCCESS};
+    }
     // ===================================  CREATE
     // -----------------------------------
 
-    createPost(post : Post) : Action {
+    createPost(post : any) : Action {
+        debugger;
+        console.log(post);
         return {type: PostActions.CREATE_POST, payload: {
                 post
             }};
@@ -30,10 +43,8 @@ export class PostActions {
         return {type: PostActions.CREATE_POST_ERROR, payload: error};
     }
 
-    createPostSuccess(post : Post) : Action {
-        return {type: PostActions.CREATE_POST_SUCCESS, payload: {
-                post
-            }};
+    createPostSuccess() : Action {
+        return {type: PostActions.CREATE_POST_SUCCESS};
     }
 
     // ===================================  LOAD -----------------------------------
