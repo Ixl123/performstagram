@@ -1,9 +1,8 @@
 import {Record} from 'immutable';
-import {INIT_AUTH, SIGN_IN_SUCCESS, SIGN_OUT_SUCCESS} from '../actions/actionTypes'
+import {INIT_AUTH, SIGN_IN_SUCCESS, SIGN_OUT_SUCCESS} from '../types/auth.types'
 export const AuthState = new Record({authenticated: false, id: null, displayName: null});
 const auth = (state = new AuthState(), {payload, type}) => {
     switch (type) {
-
         case INIT_AUTH:
         case SIGN_IN_SUCCESS:
             return state.merge({

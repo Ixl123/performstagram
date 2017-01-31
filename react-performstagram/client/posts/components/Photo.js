@@ -10,7 +10,7 @@ class Photo extends Component {
                 {post !== undefined && comments !== undefined
                     ? (
                         <div className="grid-photo-wrap">
-                            <Link to={`/view/${post.code}`}>
+                            <Link to={`/single/${post.code}`}>
                                 <img src={post.display_src} alt={post.caption} className='grid-photo'/>
                             </Link>
 
@@ -21,10 +21,12 @@ class Photo extends Component {
                                         onClick={() => {
                                         this
                                             .props
+                                            .actions
+                                            .postActions
                                             .updatePost(i, post)
                                     }}
                                         className="like">&hearts; {post.likes}</button>
-                                    <Link className='button' to={`/view/${post.code}`}>
+                                    <Link className='button' to={`/single/${post.code}`}>
                                         <span className="comment-count">
 
                                             <span className="speech-bubble"></span>

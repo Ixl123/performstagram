@@ -1,4 +1,4 @@
-import { CREATE_POST_SUCCESS, LOAD_POSTS_SUCCESS, UPDATE_POST_SUCCESS, } from '../actions/actionTypes'
+import {CREATE_POST_SUCCESS, LOAD_POSTS_SUCCESS, UPDATE_POST_SUCCESS} from '../types/post.types'
 
 const posts = (state = [], action) => {
   switch (action.type) {

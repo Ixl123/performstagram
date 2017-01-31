@@ -14,6 +14,8 @@ class Comments extends Component {
                         className='remove-comment'
                         onClick={this
                         .props
+                        .actions
+                        .commentActions
                         .removeComment
                         .bind(null, `${path}/${pathToComment}`)}>&times;</button>
                 </p>
@@ -33,6 +35,8 @@ class Comments extends Component {
         }
         this
             .props
+            .actions
+            .commentActions
             .createComment(newComment);
         this
             .refs

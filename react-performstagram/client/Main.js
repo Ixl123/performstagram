@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
-import {paths} from '../routes';
+import {paths} from './routes';
 import {browserHistory} from 'react-router'
 class Main extends Component {
 
@@ -23,7 +23,7 @@ class Main extends Component {
 
     render() {
         const {auth} = this.props;
-        const signOut = this.props.signOut;
+        const signOut = this.props.actions.authActions.signOut;
         return (
 
             <div>
@@ -45,7 +45,7 @@ class Main extends Component {
                     <div className="g-row">
                         <div className="g-col">
                             <h1>
-                                <Link to='/'>Performstagram 3000 React
+                                <Link to='/photo-grid'>Performstagram 3000 React
                                 </Link>
                             </h1>
 

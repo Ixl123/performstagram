@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Modal from 'react-modal';
 var Dropzone = require('react-dropzone');
 const uuidV4 = require('uuid/v4');
-import {firebaseAuth} from './firebase'
+import {firebaseAuth} from '../../firebase'
 const appElement = document.getElementById('root');
 const customStyles = {
     content: {
@@ -24,6 +24,8 @@ class AddPhoto extends Component {
         const file = this.props.modal.acceptedFile;
         this
             .props
+            .actions
+            .modalActions
             .closeModal();
         const author = this.props.auth.displayName;
         const caption = this.refs.caption.value;
@@ -38,6 +40,8 @@ class AddPhoto extends Component {
 
         this
             .props
+            .actions
+            .postActions
             .createPost(newPost)
         // reset form
         this
@@ -50,14 +54,17 @@ class AddPhoto extends Component {
 
         return (
             <div className="photo-grid__button_add">
-                <button onClick={this.props.openModal} className="like">+ Add image</button>
+                <button onClick={this.props.actions.modalActions.openModal} className="like">+ Add image</button>
                 <Modal
                     isOpen={this.props.modal.modalIsOpen}
-                    onRequestClose={this.props.closeModal}
+                    onRequestClose={this.props.actions.modalActions.closeModal}
                     style={customStyles}
                     contentLabel="Upload Image Modal">
                     <h2 ref="subtitle">Upload a image</h2>
-                    <Dropzone onDrop={this.props.onDrop} multiple={false} accept={'image/*'}>
+                    <Dropzone
+                        onDrop={this.props.actions.postActions.onDrop}
+                        multiple={false}
+                        accept={'image/*'}>
                         <div>Try dropping some files here, or click to select files to upload.</div>
                         {this.props.modal.acceptedFile
                             ? <img src={this.props.modal.acceptedFile.preview}/>

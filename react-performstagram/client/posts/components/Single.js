@@ -6,18 +6,26 @@ class Single extends Component {
     componentWillMount() {
         this
             .props
+            .actions
+            .postActions
             .loadPosts();
         this
             .props
+            .actions
+            .commentActions
             .loadComments()
     }
 
     componentWillUnmount() {
         this
             .props
+            .actions
+            .postActions
             .unloadPosts();
         this
             .props
+            .actions
+            .commentActions
             .unloadComments()
     }
 

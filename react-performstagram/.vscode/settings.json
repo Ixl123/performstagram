@@ -14,5 +14,6 @@
                                 // your workspace 
     }
 ,
-"languageStylus.useSeparator": false
+"languageStylus.useSeparator": false,
+"vsicons.presets.angular": false
 }

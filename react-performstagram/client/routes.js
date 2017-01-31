@@ -1,15 +1,15 @@
-import {isAuthenticated} from './components/firebase/firebaseAuth';
-import App from './components/App';
-import SignIn from './components/SignIn';
-import PhotoGrid from './components/PhotoGrid';
-import Single from './components/Single';
+import {isAuthenticated} from './firebase/firebaseAuth';
+import App from './App';
+import SignIn from './auth/components/SignIn';
+import PhotoGrid from './posts/components/PhotoGrid';
+import Single from './posts/components/Single';
 
 export const paths = {
-    ROOT: '/',
+    ROOT: '/photo-grid',
     NOMATCH: '/*',
     SIGN_IN: '/sign-in',
-    PHOTO_GRID: '/',
-    SINGLE_PHOTO: '/view/:postId'
+    PHOTO_GRID: '/photo-grid',
+    SINGLE_PHOTO: '/single/:postId'
 };
 
 /**

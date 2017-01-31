@@ -1,4 +1,4 @@
-import {OPEN_MODAL, CLOSE_MODAL, ADD_FILE, UPLOAD_FILE_ERROR, UPLOAD_FILE_REQUEST} from '../actions/actionTypes'
+import {OPEN_MODAL, CLOSE_MODAL, ADD_FILE, UPLOAD_FILE_ERROR, UPLOAD_FILE_REQUEST} from '../types/modal.types'
 const modal = (state = [], action) => {
     switch (action.type) {
         case OPEN_MODAL:

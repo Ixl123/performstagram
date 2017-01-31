@@ -1,3 +1,3 @@
-import {FirebaseList} from '../components/firebase';
+import {FirebaseList} from '../firebase';
 
 export const commentList = new FirebaseList();

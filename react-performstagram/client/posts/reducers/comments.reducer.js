@@ -6,7 +6,7 @@ import {
     REMOVE_COMMENT,
     CREATE_COMMENTS_REQUEST,
     UPDATE_COMMENTS_SUCCESS
-} from '../actions/actionTypes.js'
+} from '../types/comment.types'
 const comments = (state = [], action) => {
     switch (action.type) {
         case ADD_COMMENT:

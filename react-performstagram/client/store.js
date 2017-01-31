@@ -26,7 +26,7 @@ if (module.hot) {
     module
         .hot
         .accept('./reducers/', () => {
-            const nextRootReducer = requier('./reducers/index').default;
+            const nextRootReducer = require('./reducers/index').default;
             store.replaceReducer(nextRootReducer);
         });
 }
